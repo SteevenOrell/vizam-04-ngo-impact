@@ -50,7 +50,7 @@ npm test             # Vitest unit tests
 npm run build        # production build
 npm run test:e2e     # Playwright + axe; needs a fresh build (see below)
 npm run screenshots  # layout checks + screenshots at 240/390/768/1440 px
-npm run secret-scan  # planned, script not written yet (QA slice)
+npm run secret-scan  # scans tracked files and the full git history for keys and forbidden files
 ```
 
 `npm run test:e2e` runs against `next start` on port 3104. Run `npm run build` first. If Playwright's web server times
