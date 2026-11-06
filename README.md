@@ -89,7 +89,7 @@ Contact, volunteer and donate forms are server actions with the same behaviour:
 - Layout verified at 240, 390, 768 and 1440 px with no horizontal scroll from 300 px up and equal-size cards in grids.
 - Below 250 px the layout locks at 500 px and the visitor pans (`#root` and fixed elements are 500 px wide,
   `html { overflow-x: auto }`; the mobile menu overlay pans so Close stays reachable).
-- A full accessibility review is part of the QA slice and is not yet signed off.
+- WCAG 2.2 AA review and QA sign-off done on 2026-11-06; results are in [`docs/report.md`](docs/report.md).
 
 ## Photo credits
 

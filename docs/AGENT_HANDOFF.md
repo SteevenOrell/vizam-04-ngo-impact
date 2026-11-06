@@ -1,6 +1,6 @@
 # Agent handoff — vizam-04-ngo-impact (Weftline Collective)
 
-_Last updated: 2026-11-06 after docs slice (Claude)_
+_Last updated: 2026-11-06 after Slice C, QA and security sign-off (Claude Opus)_
 
 ## Objective
 VIZAM portfolio concept: a modern nonprofit website for the fictional NGO **Weftline Collective**, showing campaigns,
@@ -10,7 +10,7 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
 ## Repository
 - Path (this worktree): `vizam-04-ngo-impact/.claude/worktrees/agent-acc6d7b95be2d9852`
 - Main checkout: `vizam-04-ngo-impact` on branch `vizam/initial-build`. Remote: `origin` (GitHub, PUBLIC, `main` holds only the empty initial commit).
-- Branch: `worktree-agent-acc6d7b95be2d9852`   Commit: `bd45498` (Build Weftline Collective site: content model, 11 pages, demo forms and donation flow)
+- Branch: `worktree-agent-acc6d7b95be2d9852` (see `git log -1` for the head commit)
 - `.claude/` must never be committed: it is in `.gitignore` here and in `.git/info/exclude` of the main checkout.
 
 ## Approved decisions
@@ -33,33 +33,58 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
 ## Docs slice (2026-11-06)
 - Added `README.md`, `docs/report.md` (pending rows marked for Slice C), `docs/handoff.md`. No code changes.
 
-## Pending (one slice per agent run)
-1. Slice C (QA/security, Opus): write and run `scripts/secret-scan.mjs` over the working tree and full git history, `npm audit`, security + accessibility review, investigate `/mission` panX=0 in the <250 px pan test, then finalise the pending rows in `docs/report.md` and the README `secret-scan` line.
-- Commit in small steps. No push, no deploy (the coordinating session pushes after review).
+## Slice C, QA and security sign-off (2026-11-06, Opus)
+- `scripts/secret-scan.mjs` (no deps) scans tracked files and every blob in the full history for keys and tokens, and fails on `.env*`, `.secrets/`, `.claude/`, CLAUDE.md, key files or non-WebP raster images. Tested on a scratch repo with planted fake values (all caught). Result here: no findings.
+- `npm audit`: 8 moderate findings (dev-only `minimatch` 10.2.6 under typescript-eslint, GHSA-g3hv-75wg-m249). Fixed with a scoped `overrides` entry (`@typescript-eslint/typescript-estree` > `minimatch ^11.0.5`). Audit now reports 0.
+- `/mission` panX=0 was a measurement race: `scroll-behavior: smooth` animates `scrollTo`. Every route pans to 200. The screenshot script and the e2e test now use `behavior: 'instant'`.
+- Security review confirmed:
+  - forms: Zod on the server, honeypot, rate limit, no `console.*`;
+  - headers checked with `curl -I` against `next start`;
+  - the `?campaign=` value is escaped;
+  - Donate shows the demo label and has no card fields;
+  - credit links use `rel="noopener noreferrer"`.
+- Accessibility probe passed: skip link, focus ring, menu focus trap and Escape, focus on the first invalid field, reduced motion.
+- Local LCP was 0.61–0.76 s with CLS 0.
+- Open items (low/info), documented in `docs/report.md`:
+  - the rate limiter trusts the first X-Forwarded-For value;
+  - CSP keeps `'unsafe-inline'` for scripts;
+  - the limiter is in-memory.
+- Verdict: signed off for preview and PR (not for a real-money or real-data launch).
 
-## Last verified checks
+## Pending
+- Nothing in the build or QA scope. The coordinator still has to re-verify, fast-forward, push and open the PR (see Next step).
+
+## Last verified checks (final tree, Slice C)
 | Check | Command | Result | When |
 |---|---|---|---|
 | Lint | `npm run lint` | pass (no output) | 2026-11-06 |
 | Typecheck | `npm run typecheck` | pass | 2026-11-06 |
 | Unit tests | `npm test` | pass: 3 files, 28 tests | 2026-11-06 |
-| Screenshots/layout | `node scripts/screenshots.mjs` | no h-scroll >=300 px, no unequal rows, lock OK at 240 px | 2026-11-06 |
-| E2E + axe | `npm run test:e2e` (next start, port 3104) | pass: 34/34 after Slice B fix (first run: 1 failure, the lock test, updated for the new menu design) | 2026-11-06 |
-| Build | `npm run build` | pass, 38 static pages | 2026-11-06 |
-| Audit | `npm audit` | not run (Slice C) | - |
-| Secret scan | `npm run secret-scan` | not run, script missing (Slice C) | - |
+| Build | `npm run build` | pass, 38 pages | 2026-11-06 |
+| E2E + axe | `npm run test:e2e` (next start, port 3104) | pass: 34/34 | 2026-11-06 |
+| Screenshots/layout | `node scripts/screenshots.mjs` | no h-scroll >=300 px, no unequal rows; 240 px lock OK and panX=200 on every route | 2026-11-06 |
+| Audit | `npm audit` | 0 vulnerabilities | 2026-11-06 |
+| Secret scan | `npm run secret-scan` | no findings (129 files, 16 commits, 108 text blobs) | 2026-11-06 |
+| Headers | `curl -I` on `next start` | CSP, nosniff, DENY, Referrer, Permissions, HSTS, COOP; no X-Powered-By | 2026-11-06 |
 
 ## Known issues and risks
-- Build agent stopped twice on the usage limit (2026-11-05/06); work now continues in short slices, one fresh agent per slice.
 - `.claude/` must never be committed.
-- Public repo: run a secret scan over the full git history before any push.
+- Public repo: run `npm run secret-scan` again before every push.
+- Rate limiting is per instance and keyed on the first X-Forwarded-For value. This is fine for the demo; real use would need a shared store and a trusted proxy.
 
 ## Setup
 - `npm ci`, `npm run dev` (http://localhost:3104).
 - Env var names: none required.
 
 ## Next step
-Slice C (Opus): write and run `scripts/secret-scan.mjs` (working tree + full history), `npm audit`, security and accessibility review, investigate /mission panX=0, finalise the report. Note: `npm run test:e2e` needs a fresh `npm run build`; if Playwright webServer times out, start `npx next start -p 3104 -H 127.0.0.1` first.
+Coordinator:
+1. Re-verify on this branch: `npm ci && npm run lint && npm run typecheck && npm test && npm run build && npm run test:e2e && npm run secret-scan && npm audit`.
+2. Fast-forward `vizam/initial-build` to this branch.
+3. Push `vizam/initial-build`.
+4. Open the PR into `main`. Do not merge without Steeven's approval.
+
+If Playwright's webServer times out, start `npx next start -p 3104 -H 127.0.0.1` first.
 
 ## Waiting for approval
 - Vercel preview: not linked (Steeven). No production deploy.
+- PR merge into `main`: Steeven.
