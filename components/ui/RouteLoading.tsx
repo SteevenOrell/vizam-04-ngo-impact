@@ -1,4 +1,4 @@
-export default function Loading() {
+export function RouteLoading() {
   return (
     <div className="mx-auto w-full max-w-[1240px] px-4 py-16 sm:px-6 lg:px-10" role="status" aria-live="polite">
       <span className="sr-only">Loading page…</span>
