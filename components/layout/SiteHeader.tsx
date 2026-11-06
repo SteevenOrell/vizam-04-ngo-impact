@@ -67,9 +67,10 @@ export function SiteHeader() {
   }, [open, close]);
 
   return (
+    <>
     <header className="sticky top-0 z-40 border-b border-rule bg-loom/95 backdrop-blur supports-[backdrop-filter]:bg-loom/85">
       <div className="mx-auto flex h-[72px] w-full max-w-[1240px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
-        <Link href="/" className="rounded-sm text-ink" aria-label="Weftline Collective, home">
+        <Link href="/" className="rounded-sm text-ink">
           <Wordmark />
         </Link>
 
@@ -116,7 +117,9 @@ export function SiteHeader() {
           </button>
         </div>
       </div>
+    </header>
 
+      {/* Outside the header: its backdrop-filter would otherwise become the containing block of this fixed panel. */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -184,6 +187,6 @@ export function SiteHeader() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
