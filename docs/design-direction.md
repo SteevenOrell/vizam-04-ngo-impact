@@ -72,7 +72,7 @@ with "Donate now" in a pill button, three icon boxes, a counter strip, a testimo
 | `ink-soft` | `#3A3F66` | Secondary text |
 | `loom` | `#F5F0E6` | Page background (undyed cotton) |
 | `loom-deep` | `#EAE2D2` | Alternate section background |
-| `madder` | `#A8402C` | Primary accent, links on light, CTA (madder root red) — 5.6:1 on loom |
+| `madder` | `#A8402C` | Primary accent, links on light, CTA (madder root red) — 5.4:1 on loom, 4.75:1 on loom-deep |
 | `turmeric` | `#E2A53A` | Highlight on dark only (contrast-safe on ink) |
 | `indigo` | `#2E3A8C` | Interactive focus, secondary accent |
 | `moss` | `#2F6650` | Success, climate theme |
