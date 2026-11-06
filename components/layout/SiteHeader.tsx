@@ -68,56 +68,56 @@ export function SiteHeader() {
 
   return (
     <>
-    <header className="sticky top-0 z-40 border-b border-rule bg-loom/95 backdrop-blur supports-[backdrop-filter]:bg-loom/85">
-      <div className="mx-auto flex h-[72px] w-full max-w-[1240px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
-        <Link href="/" className="rounded-sm text-ink">
-          <Wordmark />
-        </Link>
-
-        <nav aria-label="Main" className="hidden xl:block">
-          <ul className="flex items-center gap-1">
-            {navItems.map((item) => {
-              const active = isActive(pathname, item.href);
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={active ? 'page' : undefined}
-                    className={`relative rounded-sm px-2.5 py-2 text-[0.95rem] font-bold transition-colors hover:text-madder ${
-                      active ? 'text-madder after:absolute after:inset-x-2.5 after:-bottom-0.5 after:h-0.5 after:bg-madder' : 'text-ink'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <Link
-            href="/donate"
-            aria-current={isActive(pathname, '/donate') ? 'page' : undefined}
-            className="hidden min-h-11 items-center gap-2 rounded-[var(--radius-md)] bg-madder px-4 py-2 font-bold text-white transition-colors hover:bg-madder-dark sm:inline-flex"
-          >
-            <Heart aria-hidden="true" className="h-4 w-4" />
-            Donate <span className="sr-only">(demo)</span>
+      <header className="sticky top-0 z-40 border-b border-rule bg-loom/95 backdrop-blur supports-[backdrop-filter]:bg-loom/85">
+        <div className="mx-auto flex h-[72px] w-full max-w-[1240px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
+          <Link href="/" className="rounded-sm text-ink">
+            <Wordmark />
           </Link>
-          <button
-            ref={buttonRef}
-            type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-[var(--radius-md)] border-2 border-ink px-3 font-bold xl:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen(true)}
-          >
-            <Menu aria-hidden="true" className="h-5 w-5" />
-            <span>Menu</span>
-          </button>
+
+          <nav aria-label="Main" className="hidden xl:block">
+            <ul className="flex items-center gap-1">
+              {navItems.map((item) => {
+                const active = isActive(pathname, item.href);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={active ? 'page' : undefined}
+                      className={`relative rounded-sm px-2.5 py-2 text-[0.95rem] font-bold transition-colors hover:text-madder ${
+                        active ? 'text-madder after:absolute after:inset-x-2.5 after:-bottom-0.5 after:h-0.5 after:bg-madder' : 'text-ink'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <Link
+              href="/donate"
+              aria-current={isActive(pathname, '/donate') ? 'page' : undefined}
+              className="hidden min-h-11 items-center gap-2 rounded-[var(--radius-md)] bg-madder px-4 py-2 font-bold text-white transition-colors hover:bg-madder-dark sm:inline-flex"
+            >
+              <Heart aria-hidden="true" className="h-4 w-4" />
+              Donate <span className="sr-only">(demo)</span>
+            </Link>
+            <button
+              ref={buttonRef}
+              type="button"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-[var(--radius-md)] border-2 border-ink px-3 font-bold xl:hidden"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              onClick={() => setOpen(true)}
+            >
+              <Menu aria-hidden="true" className="h-5 w-5" />
+              <span>Menu</span>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
       {/* Outside the header: its backdrop-filter would otherwise become the containing block of this fixed panel. */}
       <AnimatePresence>
@@ -137,7 +137,7 @@ export function SiteHeader() {
             transition={{ duration: reduce ? 0 : 0.28, ease: [0.22, 0.61, 0.36, 1] }}
           >
             <div className="warp pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
-            <div className="relative mx-auto flex min-h-full w-full max-w-[1240px] flex-col px-4 pb-10 sm:px-6 lg:px-10">
+            <div className="menu-inner relative mx-auto flex min-h-full w-full max-w-[1240px] flex-col px-4 pb-10 sm:px-6 lg:px-10">
               <div className="flex h-[72px] items-center justify-between">
                 <h2 id="mobile-menu-title" className="font-display text-xl font-bold">
                   Menu

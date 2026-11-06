@@ -59,8 +59,15 @@ for (const width of WIDTHS) {
         clientWidth: de.clientWidth,
         rootWidth: root ? Math.round(root.getBoundingClientRect().width) : null,
         unequalRows: unequal.length,
+        htmlOverflowX: getComputedStyle(de).overflowX,
+        fixedBad: Array.from(document.querySelectorAll('*')).filter((e) => getComputedStyle(e).position === 'fixed' && Math.round(e.getBoundingClientRect().width) !== 500).length,
       };
     });
+    if (width < 250) {
+      await page.evaluate(() => window.scrollTo(200, 0));
+      metrics.panned = await page.evaluate(() => window.scrollX);
+      await page.evaluate(() => window.scrollTo(0, 0));
+    }
     const file = join(OUT, `${slug(route)}-${width}.png`);
     await page.screenshot({ path: file, fullPage: true });
     report.push({ route, width, ...metrics, horizontalScroll: metrics.scrollWidth > metrics.clientWidth });
@@ -75,7 +82,7 @@ for (const width of WIDTHS) {
     const menu = await page.evaluate(() => {
       const el = document.getElementById('mobile-menu');
       const r = el?.getBoundingClientRect();
-      return { menuWidth: r ? Math.round(r.width) : null, scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth };
+      return { menuWidth: r ? Math.round(r.width) : null, menuScrollW: el?.scrollWidth, menuClientW: el?.clientWidth, scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth };
     });
     report.push({ route: '/ (menu open)', width, ...menu });
     await page.keyboard.press('Escape');
@@ -88,5 +95,5 @@ writeFileSync(join(OUT, 'report.json'), JSON.stringify(report, null, 2));
 for (const r of report) {
   const flag = r.horizontalScroll && r.width >= 300 ? '  <-- HORIZONTAL SCROLL' : '';
   const cards = r.unequalRows ? `  unequal rows: ${r.unequalRows}` : '';
-  console.log(`${String(r.width).padStart(4)} ${r.route.padEnd(40)} sw=${r.scrollWidth} cw=${r.clientWidth} root=${r.rootWidth ?? '-'}${r.menuWidth ? ` menu=${r.menuWidth}` : ''}${cards}${flag}`);
+  console.log(`${String(r.width).padStart(4)} ${r.route.padEnd(40)} sw=${r.scrollWidth} cw=${r.clientWidth} root=${r.rootWidth ?? '-'}${r.menuWidth ? ` menu=${r.menuWidth} (scrollW ${r.menuScrollW}/${r.menuClientW})` : ''}${r.width < 250 && r.htmlOverflowX ? ` ox=${r.htmlOverflowX} fixedNot500=${r.fixedBad} panX=${r.panned}` : ''}${cards}${flag}`);
 }

@@ -29,10 +29,10 @@ test('below 250 px the layout locks at 500 px and pans horizontally', async ({ p
   const menu = await page.locator('#mobile-menu').evaluate((el) => {
     const s = getComputedStyle(el);
     const r = el.getBoundingClientRect();
-    return { width: r.width, left: r.left, rightEdge: r.right, position: s.position };
+    return { width: r.width, left: r.left, position: s.position, contentWidth: el.scrollWidth, innerWidth: el.querySelector('.menu-inner')!.getBoundingClientRect().width };
   });
-  // right:auto lets the 500 px panel extend past the 240 px viewport instead of being squeezed by inset-0.
-  expect(menu).toMatchObject({ width: 500, left: 0, rightEdge: 500, position: 'fixed' });
+  // The overlay stays viewport-wide and pans inside: its 500 px content keeps the Close button reachable.
+  expect(menu).toMatchObject({ width: 240, left: 0, position: 'fixed', contentWidth: 500, innerWidth: 500 });
 
   // Panning works: the page can scroll sideways.
   await page.keyboard.press('Escape');

@@ -221,4 +221,13 @@ a {
     width: 500px !important;
     right: auto !important;
   }
+  /* Menu overlay: stay viewport-wide and pan inside, so the Close button at 500 px stays reachable. */
+  #mobile-menu[data-fixed] {
+    width: 100% !important;
+    overflow-x: auto;
+  }
+  #mobile-menu > .menu-inner {
+    width: 500px;
+    max-width: none;
+  }
 }
