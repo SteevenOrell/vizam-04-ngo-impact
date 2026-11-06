@@ -64,9 +64,9 @@ for (const width of WIDTHS) {
       };
     });
     if (width < 250) {
-      await page.evaluate(() => window.scrollTo(200, 0));
+      await page.evaluate(() => window.scrollTo({ left: 200, top: 0, behavior: 'instant' }));
       metrics.panned = await page.evaluate(() => window.scrollX);
-      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.evaluate(() => window.scrollTo({ left: 0, top: 0, behavior: 'instant' }));
     }
     const file = join(OUT, `${slug(route)}-${width}.png`);
     await page.screenshot({ path: file, fullPage: true });

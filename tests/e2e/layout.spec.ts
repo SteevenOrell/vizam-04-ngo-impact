@@ -34,9 +34,10 @@ test('below 250 px the layout locks at 500 px and pans horizontally', async ({ p
   // The overlay stays viewport-wide and pans inside: its 500 px content keeps the Close button reachable.
   expect(menu).toMatchObject({ width: 240, left: 0, position: 'fixed', contentWidth: 500, innerWidth: 500 });
 
-  // Panning works: the page can scroll sideways.
+  // Panning works: the page can scroll sideways. Instant, because html has scroll-behavior: smooth and an
+  // immediate scrollX read would race the animation (the cause of the old /mission panX=0 report).
   await page.keyboard.press('Escape');
-  await page.evaluate(() => window.scrollTo(200, 0));
+  await page.evaluate(() => window.scrollTo({ left: 200, top: 0, behavior: 'instant' }));
   expect(await page.evaluate(() => window.scrollX)).toBeGreaterThan(0);
 });
 
