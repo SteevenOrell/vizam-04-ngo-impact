@@ -1,0 +1,30 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+/build
+next-env.d.ts
+*.tsbuildinfo
+
+# tests
+/coverage
+/playwright-report
+/test-results
+/blob-report
+/screenshots-raw
+
+# env and secrets
+.env
+.env.*
+!.env.example
+*.pem
+.secrets/
+
+# misc
+.DS_Store
+npm-debug.log*
+.vercel
+.claude/
+CLAUDE.md
