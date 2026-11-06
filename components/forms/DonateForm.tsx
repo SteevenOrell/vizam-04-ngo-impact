@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useRef, useState, useTransition } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
@@ -30,6 +30,7 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
   const [serverError, setServerError] = useState<string | null>(null);
   const [choice, setChoice] = useState<string>('30');
   const [custom, setCustom] = useState('');
+  const focusTitle = useRef(false);
 
   const allocationDefault = initialAllocation && (ALLOCATIONS as readonly string[]).includes(initialAllocation) ? initialAllocation : 'where-needed';
 
@@ -60,13 +61,11 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
       const res = await submitDonation(values);
       if (res.ok && res.data) {
         setReceipt(res.data);
-        requestAnimationFrame(() => document.getElementById('donation-receipt')?.focus());
       } else if (res.ok) {
         setServerError(res.message);
       } else {
         setServerError(res.message);
         if (res.fieldErrors) for (const [f, m] of Object.entries(res.fieldErrors)) setError(f as keyof DonationInput, { type: 'server', message: m });
-        requestAnimationFrame(() => document.getElementById('donation-error')?.focus());
       }
     });
   });
@@ -76,7 +75,7 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
     setChoice('30');
     setCustom('');
     reset({ amount: 30, frequency: 'once', allocation: allocationDefault, website: '' });
-    requestAnimationFrame(() => document.getElementById('donate-form-title')?.focus());
+    focusTitle.current = true;
   }
 
   const validAmount = Number.isFinite(amount) && amount >= DONATION_MIN && amount <= DONATION_MAX;
@@ -101,7 +100,7 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
             exit={reduce ? { opacity: 0 } : { opacity: 0, y: -12 }}
             className="p-5 sm:p-8"
           >
-            <div id="donation-receipt" tabIndex={-1} role="status" className="outline-none">
+            <div id="donation-receipt" ref={(el) => el?.focus()} tabIndex={-1} role="status" className="outline-none">
               <p className="flex items-center gap-2 font-bold text-moss">
                 <BadgeCheck aria-hidden="true" className="h-6 w-6" />
                 Demo donation complete
@@ -138,12 +137,22 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
             exit={reduce ? { opacity: 0 } : { opacity: 0, y: -12 }}
             className="grid gap-8 p-5 sm:p-8"
           >
-            <h2 id="donate-form-title" tabIndex={-1} className="display-md outline-none">
+            <h2
+              id="donate-form-title"
+              ref={(el) => {
+                if (el && focusTitle.current) {
+                  focusTitle.current = false;
+                  el.focus();
+                }
+              }}
+              tabIndex={-1}
+              className="display-md outline-none"
+            >
               Choose a demo gift
             </h2>
 
             {serverError && (
-              <FormMessage tone="error" id="donation-error">
+              <FormMessage key={serverError} tone="error" id="donation-error" focusOnMount>
                 {serverError}
               </FormMessage>
             )}

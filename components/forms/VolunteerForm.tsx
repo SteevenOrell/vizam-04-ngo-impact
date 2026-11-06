@@ -28,7 +28,7 @@ const availabilityLabels: Record<(typeof AVAILABILITY)[number], string> = {
 };
 
 export function VolunteerForm() {
-  const [result, setResult] = useState<{ ok: boolean; message: string } | null>(null);
+  const [result, setResult] = useState<{ ok: boolean; message: string; key: number } | null>(null);
   const [pending, startTransition] = useTransition();
   const reduce = useReducedMotion();
 
@@ -47,14 +47,13 @@ export function VolunteerForm() {
   const onSubmit = handleSubmit((values) => {
     startTransition(async () => {
       const res = await submitVolunteer(values);
-      setResult({ ok: res.ok, message: res.message });
+      setResult({ ok: res.ok, message: res.message, key: Date.now() });
       if (!res.ok && res.fieldErrors) {
         for (const [field, message] of Object.entries(res.fieldErrors)) {
           setError(field as keyof VolunteerInput, { type: 'server', message });
         }
       }
       if (res.ok) reset();
-      requestAnimationFrame(() => document.getElementById('volunteer-result')?.focus());
     });
   });
 
@@ -75,8 +74,8 @@ export function VolunteerForm() {
       <div aria-live="polite" role="status">
         <AnimatePresence>
           {result && (
-            <motion.div initial={reduce ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-              <FormMessage tone={result.ok ? 'success' : 'error'} id="volunteer-result">
+            <motion.div key={result.key} initial={reduce ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              <FormMessage tone={result.ok ? 'success' : 'error'} id="volunteer-result" focusOnMount>
                 {result.message}
               </FormMessage>
             </motion.div>

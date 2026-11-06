@@ -8,7 +8,8 @@ const trimmed = (min: number, max: number, label: string) =>
   z
     .string({ error: `Enter your ${label}.` })
     .trim()
-    .min(min, { error: min <= 1 ? `Enter your ${label}.` : `${capitalise(label)} must be at least ${min} characters.` })
+    .min(1, { error: `Enter your ${label}.` })
+    .min(min, { error: `${capitalise(label)} must be at least ${min} characters.` })
     .max(max, { error: `${capitalise(label)} must be ${max} characters or fewer.` });
 
 function capitalise(s: string) {

@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, type ComponentProps, type ReactNode } from 'react';
+import { forwardRef, useCallback, type ComponentProps, type ReactNode } from 'react';
 import { AlertCircle, CheckCircle2, FlaskConical } from 'lucide-react';
 
 export const inputClass =
@@ -105,10 +105,15 @@ export function DemoFormNotice({ children }: { children: ReactNode }) {
   );
 }
 
-export function FormMessage({ tone, children, id }: { tone: 'success' | 'error'; children: ReactNode; id?: string }) {
+/** Result message. With focusOnMount it takes focus when it appears (remount it with a new key per result). */
+export function FormMessage({ tone, children, id, focusOnMount = false }: { tone: 'success' | 'error'; children: ReactNode; id?: string; focusOnMount?: boolean }) {
   const Icon = tone === 'success' ? CheckCircle2 : AlertCircle;
+  const ref = useCallback((el: HTMLDivElement | null) => {
+    if (el && focusOnMount) el.focus();
+  }, [focusOnMount]);
   return (
     <div
+      ref={ref}
       id={id}
       tabIndex={-1}
       className={`flex items-start gap-3 rounded-[var(--radius-md)] border-2 p-4 font-bold outline-none ${
