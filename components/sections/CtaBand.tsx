@@ -5,7 +5,7 @@ export function CtaBand() {
   return (
     <section aria-labelledby="cta-title" className="on-dark relative overflow-hidden bg-ink text-loom">
       <div aria-hidden="true" className="warp absolute inset-0 opacity-50" />
-      <ThreadLine d="M-2 80 C 15 20, 35 100, 55 45 S 85 10, 102 55" color="var(--color-turmeric)" className="inset-0 h-full w-full opacity-80" width={3} />
+      <ThreadLine d="M-2 80 C 15 20, 35 100, 55 45 S 85 10, 102 55" color="var(--color-turmeric)" className="inset-x-0 bottom-0 h-1/3 w-full opacity-60" width={3} />
       <div className="relative mx-auto grid w-full max-w-[1240px] gap-10 px-4 py-20 sm:px-6 md:grid-cols-2 md:py-28 lg:px-10">
         <div>
           <p className="eyebrow text-turmeric">Pick up a thread</p>

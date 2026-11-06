@@ -22,7 +22,8 @@
   --ease-weave: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* ---------- Base ---------- */
+/* ---------- Base (layered so Tailwind utilities can override it) ---------- */
+@layer base {
 html {
   /* Lets visitors pan the 500 px locked layout below 250 px. */
   overflow-x: auto;
@@ -76,6 +77,7 @@ a {
 
 [id] {
   scroll-margin-top: 6rem;
+}
 }
 
 /* ---------- Brand utilities ---------- */

@@ -30,9 +30,10 @@ export function ThreadLine({ d, className = '', color = 'var(--color-madder)', w
     gsap.registerPlugin(ScrollTrigger);
     const mm = gsap.matchMedia();
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      gsap.set(path, { strokeDasharray: 1, strokeDashoffset: 1 });
-      gsap.to(path, {
-        strokeDashoffset: 0,
+      // Reveal left to right with a clip-path: works with non-scaling strokes on stretched SVGs.
+      gsap.set(svg, { clipPath: 'inset(0% 100% 0% 0%)' });
+      gsap.to(svg, {
+        clipPath: 'inset(0% 0% 0% 0%)',
         ease: 'none',
         scrollTrigger: { trigger: svg, start, end, scrub: 0.8 },
       });
@@ -52,7 +53,6 @@ export function ThreadLine({ d, className = '', color = 'var(--color-madder)', w
       <path
         ref={pathRef}
         d={d}
-        pathLength={1}
         fill="none"
         stroke={color}
         strokeWidth={width}
