@@ -1,6 +1,6 @@
 # Agent handoff — vizam-04-ngo-impact (Weftline Collective)
 
-_Last updated: 2026-11-06 after Slice B (Claude)_
+_Last updated: 2026-11-06 after docs slice (Claude)_
 
 ## Objective
 VIZAM portfolio concept: a modern nonprofit website for the fictional NGO **Weftline Collective**, showing campaigns,
@@ -30,9 +30,11 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
 - Vitest unit tests in `tests/unit/` (filters, schemas, submissions); base CSS layered; hero thread revealed with clip-path (`799e845`).
 - Slice B (2026-11-06): ran `scripts/screenshots.mjs` (12 routes x 240/390/768/1440 + menu overlay) against a fresh build. No horizontal scroll from 300 px up, no unequal card rows, <250 px lock verified (root and fixed elements 500 px, html overflow-x auto, pannable). One real bug fixed: at 240 px the 500 px menu overlay hid its Close button with no way to pan; the overlay is now viewport-wide with 500 px inner content that pans (`#mobile-menu`/`.menu-inner` in `app/globals.css`); e2e assertion updated. Fixed SiteHeader indentation. Added 23 WebP screenshots (~2.5 MB) in `docs/screenshots/` via `scripts/compress-screenshots.mjs` (raw PNGs in git-ignored `screenshots-raw/`).
 
-## Pending (priority order — one slice per agent run)
-1. Slice C (QA/security, Opus): write `scripts/secret-scan.mjs` and run it over the full history, `npm audit`, accessibility/security review.
-2. Slice D (delivery): `README.md` ("VIZAM concept project — fictional organization", photo credits), `docs/report.md`; `docs/handoff.md` may point to this file.
+## Docs slice (2026-11-06)
+- Added `README.md`, `docs/report.md` (pending rows marked for Slice C), `docs/handoff.md`. No code changes.
+
+## Pending (one slice per agent run)
+1. Slice C (QA/security, Opus): write and run `scripts/secret-scan.mjs` over the working tree and full git history, `npm audit`, security + accessibility review, investigate `/mission` panX=0 in the <250 px pan test, then finalise the pending rows in `docs/report.md` and the README `secret-scan` line.
 - Commit in small steps. No push, no deploy (the coordinating session pushes after review).
 
 ## Last verified checks
@@ -57,7 +59,7 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
 - Env var names: none required.
 
 ## Next step
-Slice C (Opus): security + QA sign-off: write `scripts/secret-scan.mjs` and run it over full history, `npm audit`, accessibility/security review. Note: `npm run test:e2e` needs a fresh `npm run build`; if Playwright's webServer times out, start `npx next start -p 3104 -H 127.0.0.1` first (reuseExistingServer is on).
+Slice C (Opus): write and run `scripts/secret-scan.mjs` (working tree + full history), `npm audit`, security and accessibility review, investigate /mission panX=0, finalise the report. Note: `npm run test:e2e` needs a fresh `npm run build`; if Playwright webServer times out, start `npx next start -p 3104 -H 127.0.0.1` first.
 
 ## Waiting for approval
 - Vercel preview: not linked (Steeven). No production deploy.
