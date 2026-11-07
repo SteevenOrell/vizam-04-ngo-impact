@@ -74,15 +74,15 @@ Direction: closer to higherlifefoundation.org (see `docs/REFERENCE_ANALYSIS.md`)
 `npm run lint` pass; `npm run typecheck` pass; `npm test` 28/28; `npm run build` pass; `npm run test:e2e` 34/34 (axe on all routes, no assertion changes needed); `npm audit` 0 vulnerabilities; `npm run secret-scan` no findings. `scripts/screenshots.mjs` on 14 routes x 240/390/768/1440: no horizontal scroll at 390/768/1440, no unequal card rows, 240 px locks (scrollWidth 500, root 500, html overflow-x auto, fixedNot500=0, panX=200) on every route, menu overlay opens at 240/390/768.
 
 ## Redesign Slice 3 (2026-11-06, Sonnet) - docs and screenshots
--  regenerated from a fresh build (27 WebP, ~2.8 MB): Home, Campaigns, campaign detail, Donate, Volunteer, About at 240/390/768/1440 plus menu-open at 240/390/768.  now includes About, quality 60, crop 2600 px. Old screenshots deleted; raw PNGs in git-ignored .
+- `docs/screenshots/` regenerated from a fresh build (27 WebP, ~2.8 MB): Home, Campaigns, campaign detail, Donate, Volunteer, About at 240/390/768/1440 plus menu-open at 240/390/768. `scripts/compress-screenshots.mjs` now includes About, quality 60, crop 2600 px. Old screenshots deleted; raw PNGs in git-ignored `screenshots-raw/`.
 - Looked at home 1440/390/240, campaign detail 1440/390 and the 390 menu: photos clear and bright, text readable, nothing broken. Observations: at 240 px the grey wordmark and Menu label are faint on the pale sky of the transparent header; wide screens leave empty space under the About heading (home) and under the funding card (campaign detail). No code changed.
-- README (design section, screenshots, structure, accessibility wording),  (design summary, reference analysis note: home page only, status, checks, limitations, 111-word blurb). Security/QA sign-off marked pending re-run after redesign (Opus).
+- README (design section, screenshots, structure, accessibility wording), `docs/report.md` (design summary, reference analysis note: home page only, status, checks, limitations, 111-word blurb). Security/QA sign-off marked pending re-run after redesign (Opus).
 
 ### Checks (Slice 3, 2026-11-06)
 lint pass; typecheck pass; npm test 28/28; build pass; test:e2e 34/34; secret-scan no findings (111 files, 23 commits, 180 blobs); npm audit 0 vulnerabilities; screenshots.mjs: no h-scroll >=300 px, no unequal rows, 240 px lock OK on every route. Not re-run: headers, keyboard/focus, reduced-motion probes.
 
 ## Next step
-Opus QA and security sign-off on the redesigned tree: re-run headers, keyboard/focus, reduced motion, contrast over photos, forms; consider the 240 px header contrast; then the coordinator pushes the branch (PR #1 already open) after .
+Opus QA and security sign-off on the redesigned tree: re-run headers, keyboard/focus, reduced motion, contrast over photos, forms; consider the 240 px header contrast; then the coordinator pushes the branch (PR #1 already open) after `npm run secret-scan`.
 
 ## Pending (pre-redesign sections below are historical)
 - Nothing in the build or QA scope. The coordinator still has to re-verify, fast-forward, push and open the PR (see Next step).
