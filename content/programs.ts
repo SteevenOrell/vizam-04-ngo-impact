@@ -18,7 +18,7 @@ export const programmes: Programme[] = [
       name: 'Tapline',
       text: 'A text-message service: anyone can report a broken tap by SMS, and the mechanic, the committee and Weftline see the same repair ticket.',
     },
-    image: { src: '/images/water-pump.webp', alt: 'A man pumps water from a hand pump beside a vegetable plot.', position: '55% 50%' },
+    image: { src: '/images/water-carriers.webp', alt: 'Two women carry water containers along a dirt track with mountains behind.', position: '50% 50%' },
   },
   {
     slug: 'open-learning',
@@ -56,7 +56,7 @@ export const programmes: Programme[] = [
       name: 'Open Market Ledger',
       text: 'A shared price board and record book for cooperatives, usable on basic phones, so every member can see the same numbers.',
     },
-    image: { src: '/images/market.webp', alt: 'A busy open-air market with vendors under parasols.', position: '50% 55%' },
+    image: { src: '/images/bean-sorting.webp', alt: 'Women sorting beans by hand along a long table.', position: '50% 50%' },
   },
   {
     slug: 'climate-resilience',
@@ -75,7 +75,7 @@ export const programmes: Programme[] = [
       name: 'Tideline Maps',
       text: 'Community flood maps drawn on phones during walks along the shore and riverbanks, then printed for village halls.',
     },
-    image: { src: '/images/mangrove-saplings.webp', alt: 'Rows of young mangrove saplings planted in shallow coastal water.', position: '50% 50%' },
+    image: { src: '/images/mangrove-planting.webp', alt: 'A volunteer in a sun hat kneels to plant a young tree.', position: '50% 50%' },
   },
   {
     slug: 'digital-commons',
@@ -94,7 +94,7 @@ export const programmes: Programme[] = [
       name: 'Weftline Toolkit',
       text: 'The shared codebase behind Tapline, Shelf, Open Market Ledger and Tideline Maps, documented for local maintainers.',
     },
-    image: { src: '/images/phone-map.webp', alt: 'Hands holding a smartphone that shows a satellite map of fields.', position: '50% 50%' },
+    image: { src: '/images/code-club.webp', alt: 'A teacher guiding pupils at computers.', position: '50% 50%' },
   },
 ];
 

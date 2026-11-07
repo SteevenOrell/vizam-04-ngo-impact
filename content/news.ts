@@ -15,7 +15,7 @@ export const newsItems: NewsItem[] = [
       'No experience needed. Boots, gloves and lunch are provided; please bring a hat and water bottle.',
       'Registration is through the Volunteer page (demo form in this concept).',
     ],
-    image: { src: '/images/mangrove-saplings.webp', alt: 'Rows of young mangrove saplings in shallow water.' },
+    image: { src: '/images/mangrove-planting.webp', alt: 'A volunteer in a sun hat kneels to plant a young tree.' },
     theme: 'climate',
   },
   {
@@ -30,7 +30,7 @@ export const newsItems: NewsItem[] = [
       'Remote volunteers trace routes from walk photos; in the hall, youth groups check every line.',
       'All data is published openly, owned by the villages that collected it.',
     ],
-    image: { src: '/images/phone-mapping.webp', alt: 'A smartphone showing a green map, held in two hands.' },
+    image: { src: '/images/flood-maps.webp', alt: 'Young people studying a large paper map together on the grass.' },
     theme: 'digital',
   },
   {
@@ -56,7 +56,7 @@ export const newsItems: NewsItem[] = [
       'The first cohort trained on the hand pumps their villages chose, then practised on Tapline repair tickets.',
       'The committees set a rule of their own: every village has at least one woman mechanic.',
     ],
-    image: { src: '/images/water-pump.webp', alt: 'A hand pump beside a vegetable plot.' },
+    image: { src: '/images/water-carriers.webp', alt: 'Two women carrying water containers along a track.' },
     theme: 'water',
   },
   {
@@ -69,7 +69,7 @@ export const newsItems: NewsItem[] = [
       'Each year we publish where money went, what worked and what did not.',
       'This concept site shows illustrative figures for a fictional organization; see the Impact page.',
     ],
-    image: { src: '/images/loom-threads.webp', alt: 'White threads stretched across a wooden loom.' },
+    image: { src: '/images/team-review.webp', alt: 'Four people reviewing documents together at a wooden table.' },
   },
   {
     slug: 'volunteer-info-evening',
@@ -80,7 +80,7 @@ export const newsItems: NewsItem[] = [
     location: 'Online',
     summary: 'Meet the volunteer coordinators and hear about field days, remote mapping and code club mentoring.',
     body: ['An hour of short talks and questions. A captioned recording will be shared afterwards.'],
-    image: { src: '/images/volunteers-riverbank.webp', alt: 'Volunteers collecting litter along a riverbank.' },
+    image: { src: '/images/volunteer-lead.webp', alt: 'A volunteer lead smiles, holding a clipboard, as others collect litter.' },
   },
   {
     slug: 'cold-store-one-year',
@@ -92,7 +92,7 @@ export const newsItems: NewsItem[] = [
       'Before the cold store, catches had to be sold the same morning. Now the cooperative decides when to sell.',
       'Members used the Open Market Ledger to track prices through the season.',
     ],
-    image: { src: '/images/fishing-boats.webp', alt: 'Colourful fishing boats on a beach.' },
+    image: { src: '/images/cold-store.webp', alt: 'Crates of fish on ice in a market cold store.' },
     theme: 'livelihoods',
   },
   {
@@ -102,7 +102,7 @@ export const newsItems: NewsItem[] = [
     date: '2026-07-01',
     summary: 'The seed library is now fully run by the farmers who use it.',
     body: ['Weftline’s role ends where the community’s begins. The union now runs lending, storage and records.'],
-    image: { src: '/images/highland-terraces.webp', alt: 'Terraced fields on a misty mountainside.' },
+    image: { src: '/images/seed-grain.webp', alt: 'A woman lets harvested grain fall from her hands.' },
     theme: 'livelihoods',
   },
   {
@@ -112,7 +112,7 @@ export const newsItems: NewsItem[] = [
     date: '2026-06-12',
     summary: 'The community flood-mapping tool is published under an open licence with maintainer guides.',
     body: ['Any community group can use, adapt and host Tideline Maps. Documentation is written for first-time maintainers.'],
-    image: { src: '/images/phone-map.webp', alt: 'A phone showing a satellite map of fields.' },
+    image: { src: '/images/code-club.webp', alt: 'A teacher guiding pupils at computers.' },
     theme: 'digital',
   },
   {
@@ -122,7 +122,7 @@ export const newsItems: NewsItem[] = [
     date: '2026-05-20',
     summary: 'Neighbourhood associations on the Lowmere Plains report tanks still holding water into May.',
     body: ['The associations track tank levels on Tapline and share water by an agreed rota.'],
-    image: { src: '/images/community-build.webp', alt: 'People building a wooden structure together.' },
+    image: { src: '/images/riverbank-planting.webp', alt: 'Volunteers planting along a river bank.' },
     theme: 'water',
   },
   {
@@ -134,7 +134,7 @@ export const newsItems: NewsItem[] = [
     location: 'Kestrel Coast, south nursery',
     summary: 'See how seedlings are raised, and meet the nursery teams.',
     body: ['A morning tour of the nursery with the teams who run it.'],
-    image: { src: '/images/seedling-trays.webp', alt: 'Hands potting seedlings into small trays.' },
+    image: { src: '/images/tree-planting.webp', alt: 'A volunteer and a child planting a young tree together.' },
     theme: 'climate',
   },
   {

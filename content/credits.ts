@@ -1,49 +1,7 @@
-// Generated from the site-media credits log. All photos: Unsplash License (credit the photographer).
-export type PhotoCredit = { file: string; author: string; authorUrl: string; page: string; source: 'Unsplash' };
+// Generated from the site-media credits log. Photos: Unsplash License (credit the photographer) or Pixabay Content License.
+export type PhotoCredit = { file: string; author: string; authorUrl: string; page: string; source: 'Unsplash' | 'Pixabay' };
 
 export const photoCredits: PhotoCredit[] = [
-  {
-    "file": "hero-weaving-hands.webp",
-    "author": "Anes mchayaa",
-    "authorUrl": "https://unsplash.com/@anes02",
-    "page": "https://unsplash.com/photos/two-people-are-working-on-a-piece-of-art-NWSIQh4Z0xg",
-    "source": "Unsplash"
-  },
-  {
-    "file": "loom-threads.webp",
-    "author": "Chris Chow",
-    "authorUrl": "https://unsplash.com/@chris_chow",
-    "page": "https://unsplash.com/photos/person-holding-white-paper-towel-OQ1LDghuOEk",
-    "source": "Unsplash"
-  },
-  {
-    "file": "seedling-hands.webp",
-    "author": "Hammilton Ojijo",
-    "authorUrl": "https://unsplash.com/@ojijohammilton",
-    "page": "https://unsplash.com/photos/two-pairs-of-hands-planting-a-small-green-seedling-OQC1dP2fL80",
-    "source": "Unsplash"
-  },
-  {
-    "file": "seedling-trays.webp",
-    "author": "Alex Diaz",
-    "authorUrl": "https://unsplash.com/@memory_terra",
-    "page": "https://unsplash.com/photos/a-group-of-people-standing-around-a-table-filled-with-plants-2S1JhFhhSi4",
-    "source": "Unsplash"
-  },
-  {
-    "file": "field-planting.webp",
-    "author": "Annie Spratt",
-    "authorUrl": "https://unsplash.com/@anniespratt",
-    "page": "https://unsplash.com/photos/people-working-on-field-cIP00akjCbw",
-    "source": "Unsplash"
-  },
-  {
-    "file": "water-pump.webp",
-    "author": "Nishaan ahmed",
-    "authorUrl": "https://unsplash.com/@nishaan_ahmed",
-    "page": "https://unsplash.com/photos/a-man-standing-next-to-a-water-pump-oLfKHI0R4c0",
-    "source": "Unsplash"
-  },
   {
     "file": "classroom.webp",
     "author": "Haseeb Modi",
@@ -52,38 +10,10 @@ export const photoCredits: PhotoCredit[] = [
     "source": "Unsplash"
   },
   {
-    "file": "mangrove-saplings.webp",
-    "author": "Thomas Lohmann",
-    "authorUrl": "https://unsplash.com/@thomaslohmann",
-    "page": "https://unsplash.com/photos/a-large-body-of-water-sitting-next-to-a-sandy-beach-N8Tn9ei20QA",
-    "source": "Unsplash"
-  },
-  {
-    "file": "volunteers-riverbank.webp",
-    "author": "Vitaly Gariev",
-    "authorUrl": "https://unsplash.com/@silverkblack",
-    "page": "https://unsplash.com/photos/volunteers-collecting-trash-along-a-riverbank-tX-A7eBc45Q",
-    "source": "Unsplash"
-  },
-  {
-    "file": "volunteer-clipboard.webp",
-    "author": "Vitaly Gariev",
-    "authorUrl": "https://unsplash.com/@silverkblack",
-    "page": "https://unsplash.com/photos/person-in-gloves-writing-on-clipboard-with-volunteers-in-background-HpW0eYZi0QI",
-    "source": "Unsplash"
-  },
-  {
-    "file": "highland-terraces.webp",
-    "author": "Huy Nguyen",
-    "authorUrl": "https://unsplash.com/@huynguyen_pch",
-    "page": "https://unsplash.com/photos/terraced-rice-fields-in-the-mountains-with-clouds-zjBQjHDAcOU",
-    "source": "Unsplash"
-  },
-  {
-    "file": "harvest-path.webp",
-    "author": "Salman Rameli",
-    "authorUrl": "https://unsplash.com/@annoying_salman",
-    "page": "https://unsplash.com/photos/man-carrying-baskets-of-vegetables-on-a-hillside-gAJI-V2yB6w",
+    "file": "community-build.webp",
+    "author": "Divaris Shirichena",
+    "authorUrl": "https://unsplash.com/@divaris",
+    "page": "https://unsplash.com/photos/people-stand-under-a-pergola-on-a-sunny-day-U7Gr8M6Vf3s",
     "source": "Unsplash"
   },
   {
@@ -94,10 +24,10 @@ export const photoCredits: PhotoCredit[] = [
     "source": "Unsplash"
   },
   {
-    "file": "gathering-tree.webp",
-    "author": "Anderson Schmig",
-    "authorUrl": "https://unsplash.com/@schmig",
-    "page": "https://unsplash.com/photos/a-group-of-people-sitting-around-a-tree-jtWOuLOVeC0",
+    "file": "volunteers-riverbank.webp",
+    "author": "Vitaly Gariev",
+    "authorUrl": "https://unsplash.com/@silverkblack",
+    "page": "https://unsplash.com/photos/volunteers-collecting-trash-along-a-riverbank-tX-A7eBc45Q",
     "source": "Unsplash"
   },
   {
@@ -108,6 +38,13 @@ export const photoCredits: PhotoCredit[] = [
     "source": "Unsplash"
   },
   {
+    "file": "highland-terraces.webp",
+    "author": "Huy Nguyen",
+    "authorUrl": "https://unsplash.com/@huynguyen_pch",
+    "page": "https://unsplash.com/photos/terraced-rice-fields-in-the-mountains-with-clouds-zjBQjHDAcOU",
+    "source": "Unsplash"
+  },
+  {
     "file": "market.webp",
     "author": "Wietse Jongsma",
     "authorUrl": "https://unsplash.com/@wietsej",
@@ -115,38 +52,108 @@ export const photoCredits: PhotoCredit[] = [
     "source": "Unsplash"
   },
   {
-    "file": "phone-map.webp",
-    "author": "Bernd 📷 Dittrich",
-    "authorUrl": "https://unsplash.com/@hdbernd",
-    "page": "https://unsplash.com/photos/person-holding-smartphone-displaying-a-satellite-map-WOeiFjKnl-I",
+    "file": "hero-farmers.webp",
+    "author": "EqualStock",
+    "authorUrl": "https://unsplash.com/@equalstock",
+    "page": "https://unsplash.com/photos/a-group-of-women-standing-next-to-each-other-in-a-field-71L0v2kw424",
     "source": "Unsplash"
   },
   {
-    "file": "phone-mapping.webp",
-    "author": "Linda Söndergaard",
-    "authorUrl": "https://unsplash.com/@lindasondergaard",
-    "page": "https://unsplash.com/photos/person-holding-samsung-galaxy-android-smartphone-oSvBeKi8vLA",
+    "file": "greens-picking.webp",
+    "author": "EqualStock",
+    "authorUrl": "https://unsplash.com/@equalstock",
+    "page": "https://unsplash.com/photos/a-group-of-women-working-in-a-field-0vu32v6BmSg",
     "source": "Unsplash"
   },
   {
-    "file": "fishing-boats.webp",
-    "author": "Haseeb Modi",
-    "authorUrl": "https://unsplash.com/@haseebm",
-    "page": "https://unsplash.com/photos/boats-on-the-beach-3o1umDU_sIQ",
+    "file": "field-harvest.webp",
+    "author": "EqualStock",
+    "authorUrl": "https://unsplash.com/@equalstock",
+    "page": "https://unsplash.com/photos/a-group-of-women-working-in-a-field-7KhazgCqCNA",
     "source": "Unsplash"
   },
   {
-    "file": "delta-marsh.webp",
-    "author": "Iain",
-    "authorUrl": "https://unsplash.com/@photoken123",
-    "page": "https://unsplash.com/photos/aerial-view-of-marshland-with-winding-waterways-3XqmItLi1xQ",
+    "file": "mangrove-planting.webp",
+    "author": "Dmitry Dreyer",
+    "authorUrl": "https://unsplash.com/@deemwave",
+    "page": "https://unsplash.com/photos/woman-planting-plant-during-daytime-gHho4FE4Ga0",
     "source": "Unsplash"
   },
   {
-    "file": "community-build.webp",
-    "author": "Divaris Shirichena",
-    "authorUrl": "https://unsplash.com/@divaris",
-    "page": "https://unsplash.com/photos/people-stand-under-a-pergola-on-a-sunny-day-U7Gr8M6Vf3s",
+    "file": "riverbank-planting.webp",
+    "author": "The Tampa Bay Estuary Program",
+    "authorUrl": "https://unsplash.com/@tbep",
+    "page": "https://unsplash.com/photos/a-group-of-people-standing-next-to-a-river-CxL29J-aM5E",
+    "source": "Unsplash"
+  },
+  {
+    "file": "cold-store.webp",
+    "author": "Paul Einerhand",
+    "authorUrl": "https://unsplash.com/@pauleinerhand",
+    "page": "https://unsplash.com/photos/man-in-white-shirt-and-black-pants-standing-beside-yellow-plastic-crates-YkYA4_430Qk",
+    "source": "Unsplash"
+  },
+  {
+    "file": "garden-tending.webp",
+    "author": "Jelly Marketing",
+    "authorUrl": "https://unsplash.com/@jellymarketing",
+    "page": "https://unsplash.com/photos/teenager-and-woman-gardening-in-backyard-Z98GPfhsx3U",
+    "source": "Unsplash"
+  },
+  {
+    "file": "flood-maps.webp",
+    "author": "Maël BALLAND",
+    "authorUrl": "https://unsplash.com/@mael_balland",
+    "page": "https://unsplash.com/photos/people-sitting-on-green-grass-field-during-daytime-7rImz-goqfQ",
+    "source": "Unsplash"
+  },
+  {
+    "file": "seed-grain.webp",
+    "author": "Ali Mkumbwa",
+    "authorUrl": "https://unsplash.com/@mkumbwajr",
+    "page": "https://unsplash.com/photos/a-woman-holding-a-handful-of-grain-in-her-hands-s8Kzx7C6yqo",
+    "source": "Unsplash"
+  },
+  {
+    "file": "water-carriers.webp",
+    "author": "Craig Manners",
+    "authorUrl": "https://unsplash.com/@craigmanners_com",
+    "page": "https://unsplash.com/photos/a-couple-of-men-carrying-buckets-on-their-heads-rXaFXr-bZHQ",
+    "source": "Unsplash"
+  },
+  {
+    "file": "volunteer-lead.webp",
+    "author": "Vitaly Gariev",
+    "authorUrl": "https://unsplash.com/@silverkblack",
+    "page": "https://unsplash.com/photos/woman-with-clipboard-leads-park-cleanup-with-volunteers-fTn3_R00Q04",
+    "source": "Unsplash"
+  },
+  {
+    "file": "team-review.webp",
+    "author": "Andreea Avramescu",
+    "authorUrl": "https://unsplash.com/@minakko",
+    "page": "https://unsplash.com/photos/people-reviewing-documents-in-workspace-wR56AUlEsE4",
+    "source": "Unsplash"
+  },
+  {
+    "file": "bean-sorting.webp",
+    "author": "Max Panamá",
+    "authorUrl": "https://unsplash.com/@imaxpanama",
+    "page": "https://unsplash.com/photos/group-of-women-picking-beans-on-gray-table-Gt1A0jNzzbM",
+    "source": "Unsplash"
+  },
+  {
+    "file": "tree-planting.webp",
+    "author": "Kumar_B",
+    "authorUrl": "https://pixabay.com/users/Kumar_B-54666274/",
+    "page": "https://pixabay.com/photos/earth-planet-space-nature-10182485/",
+    "source": "Pixabay"
+  },
+  {
+    "file": "code-club.webp",
+    "author": "Poddar Group of Institutions",
+    "authorUrl": "https://unsplash.com/@poddarcollegejpr",
+    "page": "https://unsplash.com/photos/teacher-guiding-students-on-computer-in-classroom-ereEoYDIl20",
     "source": "Unsplash"
   }
 ];
