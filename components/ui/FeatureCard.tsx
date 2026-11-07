@@ -28,7 +28,7 @@ export function FeatureCard({
         className="-z-20 object-cover"
         style={{ objectPosition: image.position ?? '50% 50%' }}
       />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/50 to-black/10" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/60 to-black/35" />
       <div className="grid w-full gap-6 p-6 sm:p-10 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-7">
           {eyebrow && (

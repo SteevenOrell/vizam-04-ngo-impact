@@ -26,7 +26,7 @@ export function PhotoBand({
         className="-z-20 object-cover"
         style={{ objectPosition: image.position ?? '50% 50%' }}
       />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/55 to-black/40" />
       <div className="mx-auto w-full max-w-[1240px] px-4 py-14 sm:px-6 md:py-20 lg:px-10">
         {eyebrow && (
           <p className="eyebrow mb-5 flex items-center gap-3">

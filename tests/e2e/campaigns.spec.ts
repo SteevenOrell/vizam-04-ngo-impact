@@ -63,7 +63,8 @@ test('campaign detail page shows progress, milestones and a demo donate link', a
   await expect(page.getByRole('progressbar').first()).toHaveAttribute('aria-valuenow', '65');
   await expect(page.getByRole('heading', { name: 'Milestones' })).toBeVisible();
   await page.getByRole('link', { name: 'Give to this campaign (demo)' }).click();
-  await expect(page).toHaveURL(/donate\?campaign=twelve-taps-saren-valley/);
+  // /donate renders on demand (query string); the first render after a cold start can exceed the 5 s default.
+  await expect(page).toHaveURL(/donate\?campaign=twelve-taps-saren-valley/, { timeout: 15_000 });
   await expect(page.getByLabel('3. Where should it go?')).toHaveValue('twelve-taps-saren-valley');
 });
 
