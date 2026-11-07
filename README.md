@@ -19,11 +19,21 @@ site is labelled fictional everywhere (footer included). Details in `docs/design
 |---|---|
 | ![Home at 1440 px](docs/screenshots/home-1440.webp) | ![Campaign detail at 1440 px](docs/screenshots/campaigns_twelve-taps-saren-valley-1440.webp) |
 
-| Donate (390) | Menu open (390) |
+| Home (390) | Menu open (390) |
 |---|---|
-| ![Donate at 390 px](docs/screenshots/donate-390.webp) | ![Mobile menu at 390 px](docs/screenshots/menu-open-390.webp) |
+| ![Home at 390 px](docs/screenshots/home-390.webp) | ![Mobile menu at 390 px](docs/screenshots/menu-open-390.webp) |
 
-More widths (240, 390, 768, 1440) are in `docs/screenshots/`.
+Home, Campaigns, a campaign detail, Donate, Volunteer and About at 240, 390, 768 and 1440 px, plus the open menu at 240,
+390 and 768 px, are in `docs/screenshots/` (compressed WebP, long pages cropped at 2600 px).
+
+## Design
+
+A light, photograph-led layout: white page, near-black text, a warm-grey band for secondary sections and a single brown
+accent. Outfit (light display) and Inter (text). A full-viewport photo hero with a transparent header that turns solid on
+scroll, two-tone headings, square-bullet eyebrows, arrow links, a rounded feature card for the featured campaign,
+full-bleed photo bands and tall image pairs with captions. The direction takes its characteristics from the editorial
+feel of one reference nonprofit home page (no code, text, images or compositions copied); see `docs/design-direction.md`
+and `docs/REFERENCE_ANALYSIS.md`.
 
 ## Stack
 
@@ -61,13 +71,13 @@ Port 3104 is used because 3000/3001 are often taken.
 
 ```
 app/            routes (App Router), server actions in app/actions/forms.ts, sitemap, robots, OG image
-components/     brand, campaigns, forms, layout, motion, news, sections, ui
+components/     brand, campaigns, forms, layout, motion, news, sections, ui (FeatureCard, ImagePair, PhotoBand, primitives)
 content/        typed local content: site, programs, campaigns, news, impact, about, credits
 lib/            Zod schemas, rate limiter, submission handling, filters, formatting, metadata helpers
 public/         compressed WebP photography
 tests/unit/     Vitest; tests/e2e/ Playwright + axe
-scripts/        screenshots.mjs, compress-screenshots.mjs
-docs/           design-direction, plan, report, handoff, screenshots
+scripts/        screenshots.mjs, compress-screenshots.mjs, secret-scan.mjs
+docs/           design-direction, REFERENCE_ANALYSIS, plan, report, handoff, screenshots (WebP)
 ```
 
 ## Forms
@@ -89,7 +99,8 @@ Contact, volunteer and donate forms are server actions with the same behaviour:
 - Layout verified at 240, 390, 768 and 1440 px with no horizontal scroll from 300 px up and equal-size cards in grids.
 - Below 250 px the layout locks at 500 px and the visitor pans (`#root` and fixed elements are 500 px wide,
   `html { overflow-x: auto }`; the mobile menu overlay pans so Close stays reachable).
-- WCAG 2.2 AA review and QA sign-off done on 2026-11-06; results are in [`docs/report.md`](docs/report.md).
+- axe-core passes on every page after the redesign. The full WCAG review and security sign-off are pending a re-run
+  after the redesign; see [`docs/report.md`](docs/report.md).
 
 ## Photo credits
 
