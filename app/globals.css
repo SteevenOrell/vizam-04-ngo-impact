@@ -1,25 +1,23 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens (Slice 1 redesign). Token names are kept from the first build so inner pages keep working;
- * only the values change. White page, near-black ink, warm-grey bands, ONE brown accent.
- * Legacy names: loom = page white, loom-deep = warm-grey band, madder = the brown accent,
- * turmeric = light brown tint (used on dark backgrounds only), indigo/moss = dark neutrals (no longer accents).
- * Contrast: madder on white 6.1:1, white on madder 6.1:1, white on madder-dark 8.2:1, ink-soft on white 7.7:1,
- * ink-soft on loom-deep 6.9:1, turmeric on ink 12.6:1, ink-muted on ink 11.3:1.
+ * Design tokens. White page, near-black ink, warm-grey band sections, ONE brown accent.
+ *   page = white, band = warm-grey section, accent = the brown (accent-dark for hover, accent-tint on dark backgrounds
+ *   only), graphite = dark neutral, title-grey = second tone of titles, rule = hairlines.
+ * Contrast: accent on white 6.1:1, white on accent 6.1:1, white on accent-dark 8.2:1, ink-soft on white 7.7:1,
+ * ink-soft on band 6.9:1, accent-tint on ink 12.6:1, ink-muted on ink 11.3:1, title-grey on white 3.65:1 (large text only).
  */
 @theme {
   --color-ink: #14120f;
   --color-ink-soft: #57524b;
   --color-ink-muted: #cfc8be;
-  --color-loom: #ffffff;
-  --color-loom-deep: #f5f2ed;
-  --color-madder: #a8402c;
-  --color-madder-dark: #8a3322;
-  --color-turmeric: #efcdbf;
-  --color-indigo: #8a3322;
-  --color-moss: #3d3832;
-  --color-grey-title: #8b857d;
+  --color-page: #ffffff;
+  --color-band: #f5f2ed;
+  --color-accent: #a8402c;
+  --color-accent-dark: #8a3322;
+  --color-accent-tint: #efcdbf;
+  --color-graphite: #3d3832;
+  --color-title-grey: #8b857d;
   --color-rule: #e4ded5;
 
   --font-display: var(--font-outfit), 'Segoe UI', system-ui, sans-serif;
@@ -42,7 +40,7 @@ html {
 }
 
 body {
-  background: var(--color-loom);
+  background: var(--color-page);
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 1rem;
@@ -70,19 +68,19 @@ a {
 }
 
 ::selection {
-  background: var(--color-madder);
+  background: var(--color-accent);
   color: #fff;
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-madder-dark);
+  outline: 3px solid var(--color-accent-dark);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
 .on-dark :focus-visible,
 .on-dark:focus-visible {
-  outline-color: var(--color-turmeric);
+  outline-color: var(--color-accent-tint);
 }
 
 [id] {
@@ -90,35 +88,18 @@ a {
 }
 }
 
-/* Display headings are light/regular, not bold (unlayered on purpose: it also tames legacy font-bold on headings). */
+/* Display headings are light/regular, not bold (unlayered on purpose: it also tames legacy font-medium on headings). */
 .font-display {
   font-weight: 400;
 }
 
 /* ---------- Brand utilities ---------- */
 
-/* Legacy fine vertical threads: kept only as a very subtle accent. */
-.warp {
-  background-image: repeating-linear-gradient(
-    90deg,
-    color-mix(in srgb, currentColor 5%, transparent) 0 1px,
-    transparent 1px 16px
-  );
-}
-
-.ledger-rule {
-  border-top: 1px solid var(--color-rule);
-}
-
 .tabular {
   font-variant-numeric: tabular-nums lining-nums;
 }
 
-.prose-measure {
-  max-width: 68ch;
-}
-
-.display-xl {
+.heading-xl {
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 1.5rem + 3.6vw, 4.75rem);
   line-height: 1.04;
@@ -126,7 +107,7 @@ a {
   font-weight: 300;
 }
 
-.display-lg {
+.heading-lg {
   font-family: var(--font-display);
   font-size: clamp(2.1rem, 1.5rem + 2.6vw, 3.9rem);
   line-height: 1.06;
@@ -134,7 +115,7 @@ a {
   font-weight: 300;
 }
 
-.display-md {
+.heading-md {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 1.3rem + 1.7vw, 2.9rem);
   line-height: 1.1;
@@ -152,7 +133,7 @@ a {
 
 /* Second tone of a two-tone title. */
 .title-muted {
-  color: var(--color-grey-title);
+  color: var(--color-title-grey);
 }
 
 .on-dark .title-muted {
@@ -166,7 +147,7 @@ a {
   width: 2.5rem;
   height: 2.5rem;
   flex: none;
-  background: var(--color-madder);
+  background: var(--color-accent);
   color: #fff;
   border-radius: 2px;
   transition: background-color 200ms, transform 200ms;
@@ -174,7 +155,7 @@ a {
 
 .arrow-link:hover .arrow-chip,
 .arrow-link:focus-visible .arrow-chip {
-  background: var(--color-madder-dark);
+  background: var(--color-accent-dark);
   transform: translateX(3px);
 }
 
@@ -209,7 +190,7 @@ a {
 .woven-fill {
   background-image:
     repeating-linear-gradient(90deg, transparent 0 10px, rgb(255 255 255 / 0.22) 10px 12px),
-    linear-gradient(var(--color-madder), var(--color-madder));
+    linear-gradient(var(--color-accent), var(--color-accent));
 }
 
 .on-dark .woven-track {
@@ -217,7 +198,7 @@ a {
 }
 
 .on-dark .woven-fill {
-  background-image: linear-gradient(var(--color-turmeric), var(--color-turmeric));
+  background-image: linear-gradient(var(--color-accent-tint), var(--color-accent-tint));
 }
 
 /* ---------- Loading shimmer ---------- */
@@ -233,7 +214,7 @@ a {
 .loading-weave {
   background-image: repeating-linear-gradient(
     90deg,
-    var(--color-loom-deep) 0 12px,
+    var(--color-band) 0 12px,
     var(--color-rule) 12px 24px
   );
   animation: weave-shift 1.2s linear infinite;

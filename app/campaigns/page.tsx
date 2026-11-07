@@ -1,4 +1,5 @@
-import { Container, Eyebrow, IllustrativeNote } from '@/components/ui/primitives';
+import { Container, IllustrativeNote } from '@/components/ui/primitives';
+import { PageHero } from '@/components/sections/PageHero';
 import { CampaignCard } from '@/components/campaigns/CampaignCard';
 import { CampaignFilters } from '@/components/campaigns/CampaignFilters';
 import { Pagination } from '@/components/ui/Pagination';
@@ -20,28 +21,29 @@ export default async function CampaignsPage({ searchParams }: { searchParams: Pr
 
   return (
     <>
-      <section className="relative border-b border-rule">
-        <Container className="relative py-14 md:py-20">
-          <Eyebrow className="mb-5 text-madder">Campaigns</Eyebrow>
-          <h1 className="display-lg max-w-4xl">Every campaign was asked for by the people who run it.</h1>
-          <p className="mt-6 max-w-2xl text-lg text-ink-soft md:text-xl">
-            Filter by theme, region or status. Each page shows the plan, the open tool behind it and progress so far.
-          </p>
-          <IllustrativeNote className="mt-6" />
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Campaigns"
+        title="Every campaign was asked for"
+        titleMuted="by the people who run it."
+        lede={
+          <>
+            <p>Filter by theme, region or status. Each page shows the plan, the open tool behind it and progress so far.</p>
+            <IllustrativeNote className="mt-5" />
+          </>
+        }
+      />
 
-      <Container className="py-12 md:py-16">
+      <Container className="pb-24 md:pb-32">
         <CampaignFilters values={params} />
 
-        <p aria-live="polite" role="status" className="mt-8 font-bold" id="campaign-count">
+        <p aria-live="polite" role="status" className="mt-8 font-medium" id="campaign-count">
           {total === 0
             ? 'No campaigns match these filters.'
             : `Showing ${items.length} of ${total} campaign${total === 1 ? '' : 's'}${totalPages > 1 ? `, page ${page} of ${totalPages}` : ''}.`}
         </p>
 
         {items.length > 0 ? (
-          <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-testid="campaign-grid">
+          <ul className="mt-6 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3" data-testid="campaign-grid">
             {items.map((c) => (
               <li key={c.slug} className="h-full">
                 <CampaignCard campaign={c} headingLevel="h2" />
@@ -49,8 +51,8 @@ export default async function CampaignsPage({ searchParams }: { searchParams: Pr
             ))}
           </ul>
         ) : (
-          <div className="mt-6 rounded-[var(--radius-md)] border-2 border-dashed border-rule p-10 text-center">
-            <p className="font-display text-2xl font-bold">Nothing on this thread yet.</p>
+          <div className="mt-6 rounded-[var(--radius-card)] bg-band p-10 text-center">
+            <p className="font-display text-2xl">Nothing on this thread yet.</p>
             <p className="mt-2 text-ink-soft">Try another theme or region, or clear the filters.</p>
           </div>
         )}

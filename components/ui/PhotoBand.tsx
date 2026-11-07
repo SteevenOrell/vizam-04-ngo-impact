@@ -30,7 +30,7 @@ export function PhotoBand({
       <div className="mx-auto w-full max-w-[1240px] px-4 py-14 sm:px-6 md:py-20 lg:px-10">
         {eyebrow && (
           <p className="eyebrow mb-5 flex items-center gap-3">
-            <span aria-hidden="true" className="inline-block h-2 w-2 bg-turmeric" />
+            <span aria-hidden="true" className="inline-block h-2 w-2 bg-accent-tint" />
             {eyebrow}
           </p>
         )}

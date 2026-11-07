@@ -10,10 +10,10 @@ export function Container({ className = '', children, as: Tag = 'div' }: { class
 type Variant = 'primary' | 'secondary' | 'ghost' | 'light';
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-madder text-white hover:bg-madder-dark',
+  primary: 'bg-accent text-white hover:bg-accent-dark',
   secondary: 'border border-ink text-ink hover:bg-ink hover:text-white',
-  ghost: 'text-ink underline decoration-madder decoration-2 underline-offset-4 hover:decoration-4',
-  light: 'bg-white text-ink hover:bg-turmeric',
+  ghost: 'text-ink underline decoration-accent decoration-2 underline-offset-4 hover:decoration-4',
+  light: 'bg-white text-ink hover:bg-accent-tint',
 };
 
 const base =
@@ -39,21 +39,21 @@ export function Button({ variant = 'primary', className = '', ...rest }: Compone
   return <button className={`${base} ${variants[variant]} ${className}`} {...rest} />;
 }
 
-type Tone = 'madder' | 'ink' | 'moss' | 'indigo' | 'turmeric' | 'outline' | 'grey';
+type Tone = 'accent' | 'ink' | 'graphite' | 'deep' | 'tint' | 'outline' | 'grey';
 const tones: Record<Tone, string> = {
-  madder: 'bg-madder text-white',
-  ink: 'bg-ink text-loom',
-  moss: 'bg-moss text-white',
-  indigo: 'bg-indigo text-white',
+  accent: 'bg-accent text-white',
+  ink: 'bg-ink text-page',
+  graphite: 'bg-graphite text-white',
+  deep: 'bg-accent-dark text-white',
   grey: 'bg-white text-ink-soft ring-1 ring-rule',
-  turmeric: 'bg-turmeric text-ink',
+  tint: 'bg-accent-tint text-ink',
   outline: 'border border-current',
 };
 
 /** Dye tag: small rectangular label used for themes, statuses and honesty labels. */
 export function Tag({ tone = 'outline', children, className = '' }: { tone?: Tone; children: ReactNode; className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-1 rounded-[var(--radius-sm)] px-2 py-0.5 text-[0.8125rem] font-bold leading-5 ${tones[tone]} ${className}`}>
+    <span className={`inline-flex items-center gap-1 rounded-[var(--radius-sm)] px-2 py-0.5 text-[0.8125rem] font-medium leading-5 ${tones[tone]} ${className}`}>
       {children}
     </span>
   );
@@ -63,7 +63,7 @@ export function Tag({ tone = 'outline', children, className = '' }: { tone?: Ton
 export function Eyebrow({ children, className = '', as: Tag = 'p' }: { children: ReactNode; className?: string; as?: 'p' | 'h2' }) {
   return (
     <Tag className={`eyebrow flex items-center gap-3 ${className}`}>
-      <span aria-hidden="true" className="inline-block h-2 w-2 shrink-0 bg-madder [.on-dark_&]:bg-turmeric" />
+      <span aria-hidden="true" className="inline-block h-2 w-2 shrink-0 bg-accent [.on-dark_&]:bg-accent-tint" />
       {children}
     </Tag>
   );
@@ -90,7 +90,7 @@ export function SectionHeading({
   return (
     <div className={`max-w-3xl ${className}`}>
       {eyebrow && <Eyebrow className="mb-5">{eyebrow}</Eyebrow>}
-      <H id={id} className="display-md">
+      <H id={id} className="heading-md">
         {title}
         {titleMuted && (
           <>
@@ -107,7 +107,7 @@ export function SectionHeading({
 /** The required honesty label for every impact figure. */
 export function IllustrativeNote({ className = '', dark = false }: { className?: string; dark?: boolean }) {
   return (
-    <p className={`inline-flex items-start gap-2 text-sm font-medium ${dark ? 'text-turmeric' : 'text-madder'} ${className}`}>
+    <p className={`inline-flex items-start gap-2 text-sm font-medium ${dark ? 'text-accent-tint' : 'text-accent'} ${className}`}>
       <Info aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" />
       <span>{site.illustrativeNotice}</span>
     </p>
@@ -148,5 +148,36 @@ export function ArrowLink({
         <ArrowUpRight className="h-5 w-5" />
       </span>
     </Link>
+  );
+}
+
+/** Standard page section: optional warm-grey band, shared container and vertical rhythm. */
+export function Section({
+  labelledBy,
+  tone = 'plain',
+  className = '',
+  children,
+  id,
+}: {
+  labelledBy?: string;
+  tone?: 'plain' | 'band';
+  className?: string;
+  children: ReactNode;
+  id?: string;
+}) {
+  return (
+    <section id={id} aria-labelledby={labelledBy} className={tone === 'band' ? 'bg-band' : undefined}>
+      <Container className={`py-20 md:py-28 ${className}`}>{children}</Container>
+    </section>
+  );
+}
+
+/** Asymmetric two-column rhythm: heading on the left (5 columns), narrow content on the right (6 columns). */
+export function Split({ heading, children, className = '' }: { heading: ReactNode; children: ReactNode; className?: string }) {
+  return (
+    <div className={`grid gap-10 lg:grid-cols-12 lg:gap-10 ${className}`}>
+      <div className="lg:col-span-5">{heading}</div>
+      <div className="min-w-0 lg:col-span-6 lg:col-start-7">{children}</div>
+    </div>
   );
 }

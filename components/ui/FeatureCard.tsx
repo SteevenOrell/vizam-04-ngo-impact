@@ -33,11 +33,11 @@ export function FeatureCard({
         <div className="lg:col-span-7">
           {eyebrow && (
             <p className="eyebrow mb-4 flex items-center gap-3">
-              <span aria-hidden="true" className="inline-block h-2 w-2 bg-turmeric" />
+              <span aria-hidden="true" className="inline-block h-2 w-2 bg-accent-tint" />
               {eyebrow}
             </p>
           )}
-          <h3 className="display-md">{title}</h3>
+          <h3 className="heading-md">{title}</h3>
         </div>
         <div className="flex flex-col items-start gap-6 lg:col-span-5">
           {children && <div className="text-white/90">{children}</div>}

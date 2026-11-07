@@ -41,7 +41,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             Skip to main content
           </a>
           <p className="bg-ink px-4 py-1.5 text-center text-[0.8125rem] font-medium text-white">
-            <span className="text-turmeric">VIZAM concept project</span> — Weftline Collective is a fictional organization.
+            <span className="text-accent-tint">VIZAM concept project</span> — Weftline Collective is a fictional organization.
           </p>
           <SiteHeader />
           <main id="main" tabIndex={-1} className="flex-1 outline-none">

@@ -1,10 +1,10 @@
-import Image from 'next/image';
 import { X } from 'lucide-react';
 import { PageHero } from '@/components/sections/PageHero';
 import { CtaBand } from '@/components/sections/CtaBand';
-import { Container, SectionHeading } from '@/components/ui/primitives';
+import { Section, SectionHeading, Split } from '@/components/ui/primitives';
+import { ImagePair } from '@/components/ui/ImagePair';
+import { PhotoBand } from '@/components/ui/PhotoBand';
 import { Reveal } from '@/components/motion/Reveal';
-import { ThreadLine } from '@/components/motion/ThreadLine';
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
@@ -41,72 +41,91 @@ export default function MissionPage() {
     <>
       <PageHero
         eyebrow="Our mission"
-        title="Help communities hold together what they have built, and build what they ask for."
+        title="Help communities hold together what they have built,"
+        titleMuted="and build what they ask for."
         lede={<p>Our vision is a region where every village can fix its own water, light its own classrooms and read its own flood maps, with or without us.</p>}
-        image={{ src: '/images/community-circle.webp', alt: 'A community meeting: people sitting in a wide circle of chairs on a lawn.', position: '50% 55%' }}
+        image={{ src: '/images/community-circle.webp', alt: 'People seated in a wide circle of white chairs on a lawn during an open community meeting.', position: '50% 55%' }}
       />
 
-      <section aria-labelledby="change-title" className="relative overflow-x-clip">
-        <Container className="relative py-20 md:py-28">
-          <SectionHeading
-            id="change-title"
-            eyebrow="Theory of change"
-            title="Five crossings of the thread."
-            lede="Each step passes across the community’s own structure and binds it a little tighter, until the cloth holds without us."
-          />
-          <div className="relative mt-14">
-            <ThreadLine d="M0 50 C 10 10, 20 90, 30 50 S 50 10, 60 50 S 80 90, 100 50" className="inset-x-0 top-8 hidden h-24 w-full lg:block" width={3} />
-            <Reveal as="ol" stagger className="relative grid gap-6 lg:grid-cols-5">
-              {change.map((c, i) => (
-                <li key={c.step} data-reveal-item className="flex h-full flex-col rounded-[var(--radius-md)] border border-rule bg-white p-6">
-                  <span className="tabular grid h-12 w-12 place-items-center rounded-full bg-ink font-bold text-loom">
-                    <span className="sr-only">Step </span>
-                    {i + 1}
-                  </span>
-                  <h3 className="mt-5 font-display text-2xl font-bold">{c.step}</h3>
-                  <p className="mt-2 text-ink-soft">{c.text}</p>
-                </li>
-              ))}
-            </Reveal>
-          </div>
-        </Container>
-      </section>
-
-      <section aria-labelledby="values-title" className="border-y border-rule bg-loom-deep">
-        <Container className="grid gap-12 py-20 md:py-28 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <SectionHeading id="values-title" eyebrow="Values" title="Four dyes in every thread." />
-            <div className="relative mt-10 aspect-[4/3] overflow-hidden rounded-[var(--radius-md)]">
-              <Image src="/images/seedling-hands.webp" alt="Two pairs of hands planting a small seedling in dark soil." fill sizes="(min-width: 1024px) 38vw, 100vw" className="object-cover" />
-            </div>
-          </div>
-          <dl className="grid content-start gap-px bg-rule lg:col-span-7">
-            {values.map((v, i) => (
-              <div key={v.title} className="grid gap-2 bg-loom-deep py-6 sm:grid-cols-[3rem_1fr_2fr] sm:gap-6">
-                <span aria-hidden="true" className="tabular text-sm font-bold text-ink-soft">
+      <Section labelledBy="change-title">
+        <Split
+          heading={
+            <SectionHeading
+              id="change-title"
+              eyebrow="Theory of change"
+              title="Five crossings"
+              titleMuted="of the thread."
+              lede="Each step passes across the community’s own structure and binds it a little tighter, until the cloth holds without us."
+            />
+          }
+        >
+          <Reveal as="ol" stagger className="border-t border-rule">
+            {change.map((c, i) => (
+              <li key={c.step} data-reveal-item className="grid gap-1 border-b border-rule py-6 sm:grid-cols-[3rem_9rem_1fr] sm:gap-6">
+                <span className="tabular text-sm text-ink-soft sm:pt-2">
+                  <span className="sr-only">Step </span>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <dt className="font-display text-2xl font-bold">{v.title}</dt>
+                <h3 className="font-display text-2xl">{c.step}</h3>
+                <p className="text-ink-soft">{c.text}</p>
+              </li>
+            ))}
+          </Reveal>
+        </Split>
+      </Section>
+
+      <PhotoBand
+        image={{ src: '/images/highland-terraces.webp', alt: 'Aerial view of green and gold terraced fields among low clouds in the highlands.', position: '50% 55%' }}
+        eyebrow="Patience"
+      >
+        We would rather be slow and still standing in ten years.
+      </PhotoBand>
+
+      <Section tone="band" labelledBy="values-title">
+        <Split heading={<SectionHeading id="values-title" eyebrow="Values" title="Four values" titleMuted="in every thread." />}>
+          <dl className="border-t border-rule">
+            {values.map((v, i) => (
+              <div key={v.title} className="grid gap-1 border-b border-rule py-6 sm:grid-cols-[3rem_9rem_1fr] sm:gap-6">
+                <span aria-hidden="true" className="tabular text-sm text-ink-soft sm:pt-2">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <dt className="font-display text-2xl">{v.title}</dt>
                 <dd className="text-ink-soft">{v.text}</dd>
               </div>
             ))}
           </dl>
-        </Container>
-      </section>
+        </Split>
+        <ImagePair
+          className="mx-auto mt-20 max-w-3xl"
+          images={[
+            {
+              src: '/images/tree-planting.webp',
+              alt: 'A volunteer and a child plant a young tree together while others look on.',
+              position: '40% 50%',
+              caption: 'Care for place: native species, planted together.',
+            },
+            {
+              src: '/images/bean-sorting.webp',
+              alt: 'Women sort beans by hand along a long worktable.',
+              position: '60% 50%',
+              caption: 'Dignity: people shown at work, not in need.',
+            },
+          ]}
+        />
+      </Section>
 
-      <section aria-labelledby="wont-title">
-        <Container className="py-20 md:py-28">
-          <SectionHeading id="wont-title" eyebrow="Limits" title="Things we will not do." lede="A mission is also a list of refusals." />
-          <ul className="mt-10 grid gap-4 md:grid-cols-2">
+      <Section labelledBy="wont-title">
+        <Split heading={<SectionHeading id="wont-title" eyebrow="Limits" title="Things we" titleMuted="will not do." lede="A mission is also a list of refusals." />}>
+          <ul className="grid gap-4 sm:grid-cols-2">
             {wontDo.map((w) => (
-              <li key={w} className="flex h-full items-start gap-3 rounded-[var(--radius-md)] border-2 border-ink p-5 text-lg font-bold">
-                <X aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-madder" />
-                {w}
+              <li key={w} className="flex h-full items-start gap-3 rounded-[var(--radius-card)] bg-band p-6">
+                <X aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-accent" />
+                <span className="font-medium">{w}</span>
               </li>
             ))}
           </ul>
-        </Container>
-      </section>
+        </Split>
+      </Section>
 
       <CtaBand />
     </>

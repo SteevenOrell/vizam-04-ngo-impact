@@ -1,7 +1,8 @@
 import { PageHero } from '@/components/sections/PageHero';
 import { StatLedger } from '@/components/sections/StatLedger';
 import { CtaBand } from '@/components/sections/CtaBand';
-import { Container, IllustrativeNote, SectionHeading } from '@/components/ui/primitives';
+import { IllustrativeNote, Section, SectionHeading, Split } from '@/components/ui/primitives';
+import { PhotoBand } from '@/components/ui/PhotoBand';
 import { Reveal } from '@/components/motion/Reveal';
 import { headlineStats, measurementPrinciples, spending, themeResults, yearlyHandover } from '@/content/impact';
 import { themeLabels } from '@/content/site';
@@ -11,13 +12,13 @@ export const metadata = pageMetadata({
   title: 'Impact & Results',
   description: 'How Weftline counts results, where money goes and what is still working. Illustrative figures for a fictional organization.',
   path: '/impact',
-  image: '/images/harvest-path.webp',
+  image: '/images/solar-valley.webp',
 });
 
 const spendColours: Record<string, string> = {
-  programmes: 'bg-madder',
-  tools: 'bg-indigo',
-  fundraising: 'bg-moss',
+  programmes: 'bg-accent',
+  tools: 'bg-accent-dark',
+  fundraising: 'bg-graphite',
   admin: 'bg-ink',
 };
 
@@ -26,34 +27,37 @@ export default function ImpactPage() {
     <>
       <PageHero
         eyebrow="Impact & results"
-        title="What is still working, counted by the people who use it."
+        title="What is still working,"
+        titleMuted="counted by the people who use it."
         lede={
           <>
             <p>We count late and publish failures. Every number on this page is an illustrative figure for a fictional organization.</p>
             <IllustrativeNote className="mt-4" />
           </>
         }
-        image={{ src: '/images/harvest-path.webp', alt: 'A farmer carries baskets of vegetables along a hillside path between fields.', position: '50% 50%' }}
+        image={{ src: '/images/solar-valley.webp', alt: 'Solar panels on a terraced slope beside a village in a green mountain valley.', position: '50% 60%' }}
       />
 
-      <section aria-labelledby="headline-title">
-        <Container className="py-20 md:py-24">
-          <h2 id="headline-title" className="display-md mb-10">
-            Headline results, 2026
-          </h2>
-          <StatLedger stats={headlineStats} showNotes />
-        </Container>
-      </section>
+      <Section labelledBy="headline-title">
+        <SectionHeading id="headline-title" eyebrow="The year in numbers" title="Headline results," titleMuted="2026." className="mb-12" />
+        <StatLedger stats={headlineStats} showNotes />
+      </Section>
 
-      <section aria-labelledby="themes-title" className="border-y border-rule bg-loom-deep">
-        <Container className="py-20 md:py-24">
-          <SectionHeading id="themes-title" eyebrow="By programme" title="One result we watch in each programme." />
+      <PhotoBand
+        image={{ src: '/images/hero-farmers.webp', alt: 'Four women on a green farm plot, three standing and smiling, one digging.', position: '50% 40%' }}
+        eyebrow="Counted late"
+      >
+        We count what is still working two years later, and we publish what is not.
+      </PhotoBand>
+
+      <Section tone="band" labelledBy="themes-title">
+          <SectionHeading id="themes-title" eyebrow="By programme" title="One result we watch" titleMuted="in each programme." />
           <IllustrativeNote className="mt-6" />
-          <Reveal as="ul" stagger className="mt-8 grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-5">
+          <Reveal as="ul" stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {themeResults.map((t) => (
-              <li key={t.theme} data-reveal-item className="flex h-full flex-col bg-loom-deep p-6">
-                <span className="text-sm font-bold text-madder">{themeLabels[t.theme]}</span>
-                <span className="tabular mt-5 font-display text-4xl font-bold">
+              <li key={t.theme} data-reveal-item className="flex h-full flex-col rounded-[var(--radius-card)] bg-page p-6">
+                <span className="text-sm font-medium text-accent">{themeLabels[t.theme]}</span>
+                <span className="tabular mt-5 font-display text-4xl font-light">
                   {t.value}
                   <span className="sr-only"> (illustrative)</span>
                 </span>
@@ -61,13 +65,12 @@ export default function ImpactPage() {
               </li>
             ))}
           </Reveal>
-        </Container>
-      </section>
+      </Section>
 
-      <section aria-labelledby="spend-title">
-        <Container className="grid gap-14 py-20 md:py-24 lg:grid-cols-2">
-          <div>
-            <SectionHeading id="spend-title" eyebrow="Where each dollar goes" title="Open books, in plain words." />
+      <Section labelledBy="spend-title">
+        <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <SectionHeading id="spend-title" eyebrow="Where each dollar goes" title="Open books," titleMuted="in plain words." />
             <IllustrativeNote className="mt-6" />
             <div className="mt-8 flex h-6 w-full overflow-hidden rounded-[3px]" aria-hidden="true">
               {spending.map((s) => (
@@ -77,11 +80,11 @@ export default function ImpactPage() {
             <table className="tabular mt-6 w-full text-left">
               <caption className="sr-only">Spending by category, illustrative percentages</caption>
               <thead>
-                <tr className="border-b-2 border-ink text-sm">
-                  <th scope="col" className="py-2 font-bold">
+                <tr className="border-b border-ink text-sm">
+                  <th scope="col" className="py-2 font-medium">
                     Category
                   </th>
-                  <th scope="col" className="py-2 text-right font-bold">
+                  <th scope="col" className="py-2 text-right font-medium">
                     Share
                   </th>
                 </tr>
@@ -95,21 +98,21 @@ export default function ImpactPage() {
                         {s.label}
                       </span>
                     </th>
-                    <td className="py-3 text-right font-bold">{s.percent}%</td>
+                    <td className="py-3 text-right font-medium">{s.percent}%</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <div>
-            <SectionHeading eyebrow="Handover rate" title="Projects run fully by communities after three years." />
+          <div className="lg:col-span-6 lg:col-start-7">
+            <SectionHeading eyebrow="Handover rate" title="Projects run fully by communities" titleMuted="after three years." />
             <IllustrativeNote className="mt-6" />
             <figure className="mt-8">
-              <div className="flex h-56 items-end gap-3 border-b-2 border-ink sm:gap-5" aria-hidden="true">
+              <div className="flex h-56 items-end gap-3 border-b border-ink sm:gap-5" aria-hidden="true">
                 {yearlyHandover.map((y) => (
                   <div key={y.year} className="flex h-full flex-1 flex-col justify-end">
-                    <span className="tabular mb-1 text-center text-sm font-bold">{y.percent}%</span>
+                    <span className="tabular mb-1 text-center text-sm font-medium">{y.percent}%</span>
                     <div className="woven-fill rounded-t-[2px]" style={{ height: `${y.percent}%` }} />
                   </div>
                 ))}
@@ -141,22 +144,21 @@ export default function ImpactPage() {
               </table>
             </figure>
           </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
-      <section aria-labelledby="method-title" className="border-t border-rule bg-white/60">
-        <Container className="py-20 md:py-24">
-          <SectionHeading id="method-title" eyebrow="Method" title="How we count." />
-          <ul className="mt-10 grid gap-6 md:grid-cols-3">
+      <Section tone="band" labelledBy="method-title">
+        <Split heading={<SectionHeading id="method-title" eyebrow="Method" title="How" titleMuted="we count." />}>
+          <ul className="grid gap-4">
             {measurementPrinciples.map((m) => (
-              <li key={m.title} className="flex h-full flex-col rounded-[var(--radius-md)] border border-rule bg-loom p-6">
-                <h3 className="font-display text-xl font-bold">{m.title}</h3>
+              <li key={m.title} className="flex h-full flex-col rounded-[var(--radius-card)] bg-page p-6">
+                <h3 className="font-display text-xl">{m.title}</h3>
                 <p className="mt-2 text-ink-soft">{m.text}</p>
               </li>
             ))}
           </ul>
-        </Container>
-      </section>
+        </Split>
+      </Section>
 
       <CtaBand />
     </>

@@ -56,7 +56,7 @@ export const newsItems: NewsItem[] = [
       'The first cohort trained on the hand pumps their villages chose, then practised on Tapline repair tickets.',
       'The committees set a rule of their own: every village has at least one woman mechanic.',
     ],
-    image: { src: '/images/water-carriers.webp', alt: 'Two women carrying water containers along a track.' },
+    image: { src: '/images/water-carriers.webp', alt: 'Two women carrying water containers along a track.', position: '50% 12%' },
     theme: 'water',
   },
   {

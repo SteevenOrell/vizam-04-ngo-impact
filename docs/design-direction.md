@@ -58,21 +58,25 @@ product. A web search cannot rule out a tiny local group; the site is labelled f
 
 - **Display:** Outfit (next/font), a geometric sans, weights 300 to 500. Headings are light/regular, never bold.
 - **Text and UI:** Inter, 400 to 600, 1 rem body at 1.65 line height.
-- **Scale (fluid):** display-xl 2.4 to 4.75 rem, display-lg 2.1 to 3.9 rem, display-md 1.75 to 2.9 rem.
-- **Tokens** (legacy names kept so inner pages keep working until Slice 2 renames them):
+- **Scale (fluid):** heading-xl 2.4 to 4.75 rem, heading-lg 2.1 to 3.9 rem, heading-md 1.75 to 2.9 rem.
+- **Tokens** (Tailwind `@theme` in `app/globals.css`):
 
 | Token | Hex | Use |
 |---|---|---|
 | `ink` | `#14120F` | Text, dark footer and menu |
 | `ink-soft` | `#57524B` | Body copy on white (7.7:1) |
 | `ink-muted` | `#CFC8BE` | Muted text on ink |
-| `loom` | `#FFFFFF` | Page |
-| `loom-deep` | `#F5F2ED` | Alternate band |
-| `madder` / `madder-dark` | `#A8402C` / `#8A3322` | The one accent; white text on it is 6.1:1 / 8.2:1 |
-| `turmeric` | `#EFCDBF` | Light brown tint, dark backgrounds only (bullets, links on ink) |
-| `grey-title` | `#8B857D` | Second tone of titles (large text, 3.65:1, AA for large text) |
+| `page` | `#FFFFFF` | Page background |
+| `band` | `#F5F2ED` | Alternate warm-grey section |
+| `accent` / `accent-dark` | `#A8402C` / `#8A3322` | The one accent; white text on it is 6.1:1 / 8.2:1 |
+| `accent-tint` | `#EFCDBF` | Light brown tint, dark backgrounds only (bullets, links on ink) |
+| `title-grey` | `#8B857D` | Second tone of titles (large text, 3.65:1, AA for large text) |
+| `graphite` | `#3D3832` | Dark neutral (tags) |
 | `rule` | `#E4DED5` | Hairlines |
-| `indigo`, `moss` | `#8A3322`, `#3D3832` | Retired as accents; remapped to dark brown / dark neutral |
+
+Type scale classes: `heading-xl`, `heading-lg`, `heading-md`. Layout helpers in `components/ui/primitives.tsx`:
+`Section` and `Split` (5/6 column rhythm). Inner pages open with `PageHero`: eyebrow, two-tone title, narrow lede and
+one wide rounded photograph, with no text on the photograph.
 
 Photo overlays use only as much black gradient as needed for AA on the text that sits on them.
 

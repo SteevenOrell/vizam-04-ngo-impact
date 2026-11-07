@@ -60,7 +60,7 @@ export function VolunteerForm() {
   return (
     <form noValidate onSubmit={onSubmit} aria-labelledby="volunteer-form-title" className="grid gap-6">
       <div>
-        <h2 id="volunteer-form-title" className="display-md">
+        <h2 id="volunteer-form-title" className="heading-md">
           Register your interest
         </h2>
         <p className="mt-2 text-ink-soft">All fields are required unless marked optional.</p>
@@ -102,11 +102,11 @@ export function VolunteerForm() {
           ))}
         </SelectField>
         <fieldset aria-describedby={errors.availability ? 'v-availability-error' : undefined}>
-          <legend className="mb-1.5 font-bold">When are you usually available?</legend>
+          <legend className="mb-1.5 font-medium">When are you usually available?</legend>
           <div className="grid grid-cols-2 gap-2">
             {AVAILABILITY.map((a) => (
               <label key={a} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-[var(--radius-md)] border-2 border-rule bg-white px-3 has-[:checked]:border-ink">
-                <input type="radio" value={a} className="h-4 w-4 accent-[var(--color-madder)]" {...register('availability')} />
+                <input type="radio" value={a} className="h-4 w-4 accent-[var(--color-accent)]" {...register('availability')} />
                 {availabilityLabels[a]}
               </label>
             ))}
@@ -116,12 +116,12 @@ export function VolunteerForm() {
       </div>
 
       <fieldset aria-describedby={errors.interests ? 'v-interests-error' : undefined}>
-        <legend className="mb-1.5 font-bold">How would you like to help?</legend>
+        <legend className="mb-1.5 font-medium">How would you like to help?</legend>
         <p className="mb-2 text-sm text-ink-soft">Choose all that apply.</p>
         <div className="grid gap-2 sm:grid-cols-2">
           {VOLUNTEER_INTERESTS.map((i) => (
             <label key={i} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-[var(--radius-md)] border-2 border-rule bg-white px-3 py-2 has-[:checked]:border-ink">
-              <input type="checkbox" value={i} className="h-4 w-4 shrink-0 accent-[var(--color-madder)]" {...register('interests')} />
+              <input type="checkbox" value={i} className="h-4 w-4 shrink-0 accent-[var(--color-accent)]" {...register('interests')} />
               {interestLabels[i]}
             </label>
           ))}
@@ -143,7 +143,7 @@ export function VolunteerForm() {
         <label className="flex cursor-pointer items-start gap-3">
           <input
             type="checkbox"
-            className="mt-1 h-5 w-5 shrink-0 accent-[var(--color-madder)]"
+            className="mt-1 h-5 w-5 shrink-0 accent-[var(--color-accent)]"
             aria-invalid={errors.consent ? true : undefined}
             aria-describedby={errors.consent ? 'v-consent-error' : undefined}
             {...register('consent')}

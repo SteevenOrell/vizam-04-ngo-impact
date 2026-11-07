@@ -9,7 +9,7 @@ export function ImagePair({ images, className = '' }: { images: [CaptionedImage,
     <div className={`grid grid-cols-2 gap-3 sm:gap-5 ${className}`}>
       {images.map((img, i) => (
         <figure key={img.src} className={i === 1 ? 'mt-8 sm:mt-14' : ''}>
-          <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-md)] bg-loom-deep">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-md)] bg-band">
             <Image
               src={img.src}
               alt={img.alt}

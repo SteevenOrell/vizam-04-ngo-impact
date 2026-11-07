@@ -1,6 +1,6 @@
 import { Mail, MapPin, Newspaper } from 'lucide-react';
 import { PageHero } from '@/components/sections/PageHero';
-import { Container } from '@/components/ui/primitives';
+import { Container, Eyebrow } from '@/components/ui/primitives';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { site } from '@/content/site';
 import { pageMetadata } from '@/lib/metadata';
@@ -9,7 +9,7 @@ export const metadata = pageMetadata({
   title: 'Contact',
   description: 'Contact Weftline Collective (fictional organization, VIZAM concept project). Demo contact form.',
   path: '/contact',
-  image: '/images/gathering-tree.webp',
+  image: '/images/team-review.webp',
 });
 
 export default function ContactPage() {
@@ -17,21 +17,22 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Write to us. We answer within five working days."
+        title="Write to us."
+        titleMuted="We answer within five working days."
         lede={<p>Partnerships, press, volunteering or a question about a campaign. (In this concept, the form is a demo and the addresses are fictional.)</p>}
-        image={{ src: '/images/gathering-tree.webp', alt: 'A small group sitting together in the shade of a tree.', position: '50% 50%' }}
+        image={{ src: '/images/team-review.webp', alt: 'Four colleagues around a wooden table reviewing printed pages together.', position: '50% 45%' }}
       />
-      <Container className="grid gap-12 py-16 md:py-20 lg:grid-cols-12">
+      <Container className="grid gap-14 py-20 md:py-28 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-4">
-          <h2 className="font-display text-2xl font-bold">Other ways to reach us</h2>
-          <dl className="mt-6 grid gap-6">
+          <Eyebrow className="mb-5">Other ways to reach us</Eyebrow>
+          <dl className="grid gap-8 border-t border-rule pt-8">
             <div className="flex gap-3">
               <dt>
-                <Mail aria-hidden="true" className="mt-1 h-5 w-5 text-madder" />
+                <Mail aria-hidden="true" className="mt-1 h-5 w-5 text-accent" />
                 <span className="sr-only">Email</span>
               </dt>
               <dd>
-                <a href={`mailto:${site.email}`} className="font-bold underline underline-offset-4 hover:text-madder">
+                <a href={`mailto:${site.email}`} className="font-medium underline underline-offset-4 hover:text-accent">
                   {site.email}
                 </a>
                 <p className="text-sm text-ink-soft">Fictional address, not monitored.</p>
@@ -39,11 +40,11 @@ export default function ContactPage() {
             </div>
             <div className="flex gap-3">
               <dt>
-                <Newspaper aria-hidden="true" className="mt-1 h-5 w-5 text-madder" />
+                <Newspaper aria-hidden="true" className="mt-1 h-5 w-5 text-accent" />
                 <span className="sr-only">Press</span>
               </dt>
               <dd>
-                <a href={`mailto:${site.press}`} className="font-bold underline underline-offset-4 hover:text-madder">
+                <a href={`mailto:${site.press}`} className="font-medium underline underline-offset-4 hover:text-accent">
                   {site.press}
                 </a>
                 <p className="text-sm text-ink-soft">Media requests (fictional).</p>
@@ -51,7 +52,7 @@ export default function ContactPage() {
             </div>
             <div className="flex gap-3">
               <dt>
-                <MapPin aria-hidden="true" className="mt-1 h-5 w-5 text-madder" />
+                <MapPin aria-hidden="true" className="mt-1 h-5 w-5 text-accent" />
                 <span className="sr-only">Address</span>
               </dt>
               <dd>
@@ -67,7 +68,7 @@ export default function ContactPage() {
             </div>
           </dl>
         </div>
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-7 lg:col-start-6">
           <ContactForm />
         </div>
       </Container>

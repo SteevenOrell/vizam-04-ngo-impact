@@ -9,11 +9,11 @@ export function StatLedger({ stats, dark = false, showNotes = false }: { stats: 
       <IllustrativeNote dark={dark} className="mb-6" />
       <Reveal as="ol" stagger className={`grid gap-4 sm:grid-cols-2 lg:grid-cols-4`}>
         {stats.map((s, i) => (
-          <li key={s.id} data-reveal-item className={`flex flex-col rounded-[var(--radius-card)] p-6 ${dark ? 'bg-white/10' : 'bg-loom-deep'}`}>
+          <li key={s.id} data-reveal-item className={`flex flex-col rounded-[var(--radius-card)] p-6 ${dark ? 'bg-white/10' : 'bg-band'}`}>
             <span aria-hidden="true" className={`tabular text-sm font-medium ${dark ? 'text-ink-muted' : 'text-ink-soft'}`}>
               {String(i + 1).padStart(2, '0')}
             </span>
-            <span className={`tabular mt-6 font-display text-5xl font-light tracking-tight ${dark ? 'text-turmeric' : 'text-ink'}`}>
+            <span className={`tabular mt-6 font-display text-5xl font-light tracking-tight ${dark ? 'text-accent-tint' : 'text-ink'}`}>
               {s.value}
               <span className="sr-only"> (illustrative)</span>
             </span>

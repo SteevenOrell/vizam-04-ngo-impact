@@ -5,7 +5,7 @@ import { navItems, site } from '@/content/site';
 import { programmes } from '@/content/programs';
 
 export function SiteFooter() {
-  const linkClass = 'rounded-sm text-white/85 underline-offset-4 hover:text-turmeric hover:underline';
+  const linkClass = 'rounded-sm text-white/85 underline-offset-4 hover:text-accent-tint hover:underline';
   return (
     <footer className="on-dark bg-ink text-white [--weft:#f3d3c7]">
       <div className="mx-auto w-full max-w-[1240px] px-4 pt-20 pb-10 sm:px-6 lg:px-10">
@@ -20,7 +20,7 @@ export function SiteFooter() {
               together with open digital tools.
             </p>
             <p className="mt-6 rounded-[var(--radius-md)] border border-white/25 p-4 text-sm text-white/90">
-              <strong className="font-medium text-turmeric">{site.conceptNotice}</strong> Weftline Collective, its places, people,
+              <strong className="font-medium text-accent-tint">{site.conceptNotice}</strong> Weftline Collective, its places, people,
               campaigns and figures are invented for a design portfolio. Donations and forms are demos: no money is taken
               and nothing is sent or stored.
             </p>
@@ -58,7 +58,7 @@ export function SiteFooter() {
               Write to us
             </Eyebrow>
             <p className="text-ink-muted">
-              <a href={`mailto:${site.email}`} className="rounded-sm text-white underline underline-offset-4 hover:text-turmeric">
+              <a href={`mailto:${site.email}`} className="rounded-sm text-white underline underline-offset-4 hover:text-accent-tint">
                 {site.email}
               </a>
               <br />
@@ -73,7 +73,7 @@ export function SiteFooter() {
           </p>
           <p>
             Photography from Unsplash —{' '}
-            <Link href="/about#credits" className="underline underline-offset-4 hover:text-turmeric">
+            <Link href="/about#credits" className="underline underline-offset-4 hover:text-accent-tint">
               photo credits
             </Link>
           </p>

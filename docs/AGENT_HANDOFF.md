@@ -1,6 +1,6 @@
 # Agent handoff — vizam-04-ngo-impact (Weftline Collective)
 
-_Last updated: 2026-11-06 after redesign Slice 1 (Claude Sonnet)_
+_Last updated: 2026-11-06 after redesign Slice 2 (Claude Sonnet)_
 
 ## Objective
 VIZAM portfolio concept: a modern nonprofit website for the fictional NGO **Weftline Collective**, showing campaigns,
@@ -63,14 +63,23 @@ Direction: closer to higherlifefoundation.org (see `docs/REFERENCE_ANALYSIS.md`)
 ### Checks (Slice 1)
 `npm run lint` pass; `npm run typecheck` pass; `npm test` 28/28; `npm run build` pass; `npm run test:e2e` 34/34 (incl. axe on all 12 routes); home at 240/390/768/1440 px via headless Playwright screenshots: no horizontal scroll at 390/768/1440, 240 px locks at 500 px (scrollWidth 500), mobile menu opens with Close, Get Involved and Donate (demo). Not run this slice: `npm audit`, `npm run secret-scan`, `scripts/screenshots.mjs`, portfolio screenshot refresh.
 
-### Known gaps / Slice 2 input
-- Photos are still the old set: the reading-room photo appears twice on home (featured card and latest news); hero text sits on a gradient over a fairly dark crop. Slice 2: find brighter, sharper photos (hero, band, pairs, programme images), update `content/credits.ts`/README.
-- Inner pages only inherit tokens and shared components; they are not yet re-laid out (PageHero is still a split layout, programmes/mission/about/impact/news/volunteer/donate/contact pages use legacy `font-bold`, `text-turmeric`, `display-*` classes; rename legacy tokens).
-- Axe cannot measure text contrast over photographs: hero/band/feature-card text was checked by eye only.
-- `docs/screenshots/` and the README screenshots are from the old design.
+## Redesign Slice 2 (2026-11-06, Sonnet) — photos and inner pages
+- Photos: audited all 21; kept 7 (classroom, community-build, community-circle, volunteers-riverbank, solar-valley, highland-terraces, market); deleted 14 dark/blurry/filtered/ambiguous ones; added 15 new (Unsplash + 1 Pixabay): hero-farmers, greens-picking, field-harvest, mangrove-planting, riverbank-planting, code-club, cold-store, garden-tending, flood-maps, seed-grain, water-carriers, volunteer-lead, team-review, bean-sorting, tree-planting. 22 WebP in `public/images`; `content/credits.ts`, `public/images/CREDITS.md` and the README credits table regenerated (source is now Unsplash or Pixabay). Campaigns (10), news (12) and programmes (5) each have a distinct photo within their list; home no longer repeats a photo (latest-news picker skips the featured campaign's image). code-club is cropped to hide laptop logos.
+- Colour tokens renamed everywhere: `page`, `band`, `accent`, `accent-dark`, `accent-tint`, `graphite`, `title-grey` (old loom/madder/turmeric/indigo/moss gone). `font-bold` removed; type scale classes renamed `heading-xl/lg/md`; Tag tones are `accent|ink|graphite|deep|tint|outline|grey`. `.warp`, `.ledger-rule`, `.prose-measure` removed.
+- New helpers `Section` and `Split` in `components/ui/primitives.tsx`. `PageHero` is now light: eyebrow, two-tone title, narrow lede, optional wide rounded photo (priority, no text on the photo). Cards (campaign, news) are borderless with rounded photo, equal height.
+- Re-laid out in the new style: About, Mission, Programs, Campaigns list and detail (light funding card, hero photo), Impact, News list and detail, Volunteer (photo band), Donate, Contact, 404. Home hero uses hero-farmers with a top scrim (nav) and a strengthened bottom gradient. Honesty labels and all form behaviour unchanged (forms not touched except token renames).
+- Contrast over photos measured with a Playwright probe (hides text, samples the pixels behind each text element, 98th-percentile luminance vs text colour) on /, /about, /mission, /impact, /volunteer at 390 and 1440 px: all hero, band and feature-card text passes AA (one false alarm on the white mobile "Menu" label, which is clearly legible; probe artifact). Probe script lived in the session scratchpad, not in the repo.
+
+### Checks (Slice 2)
+`npm run lint` pass; `npm run typecheck` pass; `npm test` 28/28; `npm run build` pass; `npm run test:e2e` 34/34 (axe on all routes, no assertion changes needed); `npm audit` 0 vulnerabilities; `npm run secret-scan` no findings. `scripts/screenshots.mjs` on 14 routes x 240/390/768/1440: no horizontal scroll at 390/768/1440, no unequal card rows, 240 px locks (scrollWidth 500, root 500, html overflow-x auto, fixedNot500=0, panX=200) on every route, menu overlay opens at 240/390/768.
+
+### Known gaps
+- `docs/screenshots/` and the README screenshots/portfolio images are still the old design (Slice 3).
+- README prose (design description) and `docs/report.md` still describe the old design; only the credits table was updated.
+- Photo notes: hero sky is slightly dimmed by the nav scrim; the water-carriers photo shows people from behind (deliberate, no faces of vulnerable people).
 
 ## Next step
-Slice 2: inner pages (About, Mission, Programs, Campaigns list/detail, Impact, News list/detail, Volunteer, Donate, Contact) in the new style plus clearer photos (site-media skill; Unsplash/Pixabay only). Then re-run all checks, refresh `docs/screenshots/`.
+Slice 3 (Opus for QA): refresh `docs/screenshots/` (scripts/screenshots.mjs, scripts/compress-screenshots.mjs) and README screenshots, update README/report for the new design, full QA and security re-check (axe, keyboard, reduced motion, headers), then push/PR update by the coordinator.
 
 ## Pending (pre-redesign sections below are historical)
 - Nothing in the build or QA scope. The coordinator still has to re-verify, fast-forward, push and open the PR (see Next step).

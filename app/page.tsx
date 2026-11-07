@@ -38,26 +38,27 @@ export default function HomePage() {
   const featured = getCampaign('ombra-reading-rooms')!;
   const pct = fundedPercent(featured);
   const events = sortedNews(newsItems.filter((n) => n.type === 'event')).slice(0, 2).reverse();
-  const latest = sortedNews(newsItems.filter((n) => n.type !== 'event'))[0];
+  const latest = sortedNews(newsItems.filter((n) => n.type !== 'event' && n.image.src !== featured.image.src))[0];
 
   return (
     <>
       {/* Hero: full-viewport photograph, headline low in the frame */}
       <section aria-labelledby="hero-title" className="on-dark relative isolate flex min-h-[100svh] items-end overflow-hidden text-white">
         <Image
-          src="/images/community-circle.webp"
-          alt="People seated in a wide circle on a lawn during an outdoor community meeting."
+          src="/images/hero-farmers.webp"
+          alt="Four women on a green farm plot in bright sun, one digging and three standing and smiling."
           fill
           priority
           sizes="100vw"
           className="-z-20 object-cover"
-          style={{ objectPosition: '50% 60%' }}
+          style={{ objectPosition: '50% 35%' }}
         />
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/15 via-45% to-black/5" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/50 via-45% to-transparent md:via-black/40" />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-44 bg-gradient-to-b from-black/60 to-transparent" />
         <div className="mx-auto w-full max-w-[1240px] px-4 pb-14 pt-32 sm:px-6 md:pb-20 lg:px-10">
           <Eyebrow className="mb-8">Welcome · a fictional community-led nonprofit</Eyebrow>
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-            <h1 id="hero-title" className="display-xl lg:col-span-8">
+            <h1 id="hero-title" className="heading-xl lg:col-span-8">
               We are the crossing thread.
             </h1>
             <div className="flex flex-col items-start gap-6 lg:col-span-4 lg:items-end lg:text-right">
@@ -96,16 +97,16 @@ export default function HomePage() {
                   caption: 'Neighbours raising a shade frame for a reading room.',
                 },
                 {
-                  src: '/images/seedling-trays.webp',
-                  alt: 'Hands potting young seedlings into small black pots of soil.',
-                  position: '50% 50%',
-                  caption: 'Seedlings potted for a coastal nursery.',
+                  src: '/images/garden-tending.webp',
+                  alt: 'A teenager and an older woman tending vegetables together in a raised garden bed.',
+                  position: '50% 40%',
+                  caption: 'A neighbourhood garden, tended across generations.',
                 },
               ]}
             />
           </div>
         </div>
-        <ThreadLine d="M0 62 C 12 40, 22 85, 36 70 S 58 30, 70 52 S 90 88, 100 60" color="var(--color-madder)" className="inset-x-0 bottom-0 h-32 w-full opacity-20" width={2} start="top 80%" end="bottom top" />
+        <ThreadLine d="M0 62 C 12 40, 22 85, 36 70 S 58 30, 70 52 S 90 88, 100 60" color="var(--color-accent)" className="inset-x-0 bottom-0 h-32 w-full opacity-20" width={2} start="top 80%" end="bottom top" />
       </section>
 
       {/* Featured campaign */}
@@ -152,7 +153,7 @@ export default function HomePage() {
       </PhotoBand>
 
       {/* Commitments */}
-      <section aria-labelledby="commitments-title" className="bg-loom-deep">
+      <section aria-labelledby="commitments-title" className="bg-band">
         <div className="mx-auto w-full max-w-[1240px] px-4 py-24 sm:px-6 md:py-32 lg:px-10">
           <SectionHeading
             id="commitments-title"
@@ -164,7 +165,7 @@ export default function HomePage() {
           <Reveal as="ol" stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {commitments.map((s) => (
               <li key={s.n} data-reveal-item className="flex flex-col rounded-[var(--radius-card)] bg-white p-7">
-                <span aria-hidden="true" className="tabular font-display text-4xl font-light text-madder">
+                <span aria-hidden="true" className="tabular font-display text-4xl font-light text-accent">
                   {s.n}
                 </span>
                 <h3 className="mt-10 font-display text-2xl">{s.title}</h3>
@@ -192,12 +193,12 @@ export default function HomePage() {
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <h3 className="font-display text-2xl md:col-span-4 md:text-3xl">
-                    <Link href={`/programs#${p.slug}`} className="outline-none after:absolute after:inset-0 after:content-[''] group-hover:text-madder">
+                    <Link href={`/programs#${p.slug}`} className="outline-none after:absolute after:inset-0 after:content-[''] group-hover:text-accent">
                       {p.name}
                     </Link>
                   </h3>
                   <p className="text-ink-soft md:col-span-5">{p.lede}</p>
-                  <p className="text-sm font-medium text-madder md:col-span-2 md:text-right">{p.digitalTool.name}</p>
+                  <p className="text-sm font-medium text-accent md:col-span-2 md:text-right">{p.digitalTool.name}</p>
                 </div>
               </li>
             ))}
@@ -232,15 +233,15 @@ export default function HomePage() {
           <div className="mt-14 grid gap-12 lg:grid-cols-12">
             {latest && (
               <article className="group relative lg:col-span-7">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-card)] bg-loom-deep">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-card)] bg-band">
                   <Image src={latest.image.src} alt="" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
                 </div>
                 <p className="mt-6 text-sm text-ink-soft">
                   <time dateTime={latest.date}>{formatDate(latest.date)}</time>
-                  {latest.theme && <span className="text-madder"> · {themeLabels[latest.theme]}</span>}
+                  {latest.theme && <span className="text-accent"> · {themeLabels[latest.theme]}</span>}
                 </p>
                 <h3 className="mt-2 font-display text-3xl leading-tight">
-                  <Link href={`/news/${latest.slug}`} className="outline-none after:absolute after:inset-0 after:content-[''] group-hover:text-madder group-focus-within:underline">
+                  <Link href={`/news/${latest.slug}`} className="outline-none after:absolute after:inset-0 after:content-[''] group-hover:text-accent group-focus-within:underline">
                     {latest.title}
                   </Link>
                 </h3>
@@ -249,18 +250,18 @@ export default function HomePage() {
             )}
             <div className="lg:col-span-5">
               <h3 className="eyebrow flex items-center gap-3">
-                <span aria-hidden="true" className="inline-block h-2 w-2 bg-madder" />
+                <span aria-hidden="true" className="inline-block h-2 w-2 bg-accent" />
                 Upcoming events
               </h3>
               <ul className="mt-5 border-t border-rule">
                 {events.map((e) => (
                   <li key={e.slug} className="group relative border-b border-rule py-6">
                     <p className="tabular flex items-center gap-2 text-sm font-medium">
-                      <CalendarDays aria-hidden="true" className="h-4 w-4 text-madder" />
+                      <CalendarDays aria-hidden="true" className="h-4 w-4 text-accent" />
                       <time dateTime={e.date}>{formatDate(e.date, { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' })}</time>
                     </p>
                     <h4 className="mt-2 font-display text-xl leading-snug">
-                      <Link href={`/news/${e.slug}`} className="outline-none after:absolute after:inset-0 after:content-[''] group-hover:text-madder group-focus-within:underline">
+                      <Link href={`/news/${e.slug}`} className="outline-none after:absolute after:inset-0 after:content-[''] group-hover:text-accent group-focus-within:underline">
                         {e.title}
                       </Link>
                     </h4>

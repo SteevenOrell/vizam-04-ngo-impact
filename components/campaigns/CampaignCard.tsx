@@ -7,14 +7,14 @@ import { regionLabels, statusLabels, themeLabels } from '@/content/site';
 import { formatMoney } from '@/lib/format';
 import { Tag, WovenProgress } from '@/components/ui/primitives';
 
-const statusTone = { active: 'madder', upcoming: 'ink', completed: 'grey' } as const;
+const statusTone = { active: 'accent', upcoming: 'ink', completed: 'grey' } as const;
 
 export function CampaignCard({ campaign, headingLevel = 'h3' }: { campaign: Campaign; headingLevel?: 'h2' | 'h3' }) {
   const H = headingLevel;
   const pct = fundedPercent(campaign);
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-rule bg-white transition-shadow duration-300 focus-within:shadow-[0_0_0_3px_var(--color-madder-dark)] hover:shadow-[0_18px_40px_-24px_rgb(20_18_15/0.4)]">
-      <div className="relative aspect-[3/2] overflow-hidden bg-loom-deep">
+    <article className="group relative flex h-full flex-col focus-within:outline focus-within:outline-[3px] focus-within:outline-offset-4 focus-within:outline-accent-dark">
+      <div className="relative aspect-[3/2] overflow-hidden rounded-[var(--radius-card)] bg-band">
         <Image
           src={campaign.image.src}
           alt=""
@@ -27,15 +27,15 @@ export function CampaignCard({ campaign, headingLevel = 'h3' }: { campaign: Camp
           <Tag tone={statusTone[campaign.status]}>{statusLabels[campaign.status]}</Tag>
         </div>
       </div>
-      <div className="flex flex-1 flex-col p-5">
-        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-bold text-ink-soft">
-          <span className="text-madder">{themeLabels[campaign.theme]}</span>
+      <div className="flex flex-1 flex-col pt-5">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-soft">
+          <span className="text-accent">{themeLabels[campaign.theme]}</span>
           <span className="inline-flex items-center gap-1">
             <MapPin aria-hidden="true" className="h-3.5 w-3.5" />
             {regionLabels[campaign.region]}
           </span>
         </p>
-        <H className="mt-2 font-display text-[1.4rem] font-bold leading-tight">
+        <H className="mt-3 font-display text-[1.5rem] leading-tight group-hover:text-accent">
           <Link href={`/campaigns/${campaign.slug}`} className="outline-none after:absolute after:inset-0 after:content-['']">
             {campaign.title}
           </Link>

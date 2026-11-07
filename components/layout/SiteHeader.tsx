@@ -103,8 +103,8 @@ export function SiteHeader() {
   }, [open, close]);
 
   const linkBase = 'relative inline-flex min-h-11 items-center gap-1 rounded-sm px-3 text-[0.95rem] font-medium transition-colors';
-  const tone = transparent ? 'hover:text-white/75' : 'hover:text-madder';
-  const current = 'underline decoration-madder decoration-2 underline-offset-8';
+  const tone = transparent ? 'hover:text-white/75' : 'hover:text-accent';
+  const current = 'underline decoration-accent decoration-2 underline-offset-8';
 
   return (
     <>
@@ -171,9 +171,9 @@ export function SiteHeader() {
                                 <Link
                                   href={item.href}
                                   aria-current={active ? 'page' : undefined}
-                                  className="block rounded-[var(--radius-md)] px-3 py-2.5 hover:bg-loom-deep"
+                                  className="block rounded-[var(--radius-md)] px-3 py-2.5 hover:bg-band"
                                 >
-                                  <span className={`block font-medium ${active ? 'text-madder' : ''}`}>{item.label}</span>
+                                  <span className={`block font-medium ${active ? 'text-accent' : ''}`}>{item.label}</span>
                                   <span className="block text-sm text-ink-soft">{item.hint}</span>
                                 </Link>
                               </li>
@@ -198,7 +198,7 @@ export function SiteHeader() {
               </Link>
               <Link
                 href="/volunteer"
-                className="hidden min-h-11 items-center rounded-[var(--radius-md)] bg-madder px-5 font-medium text-white transition-colors hover:bg-madder-dark sm:inline-flex"
+                className="hidden min-h-11 items-center rounded-[var(--radius-md)] bg-accent px-5 font-medium text-white transition-colors hover:bg-accent-dark sm:inline-flex"
               >
                 Get Involved
               </Link>
@@ -262,8 +262,8 @@ export function SiteHeader() {
                         <Link
                           href={item.href}
                           aria-current={active ? 'page' : undefined}
-                          className={`flex items-baseline gap-4 py-3 font-display text-[1.75rem] leading-tight hover:text-turmeric ${
-                            active ? 'text-turmeric' : ''
+                          className={`flex items-baseline gap-4 py-3 font-display text-[1.75rem] leading-tight hover:text-accent-tint ${
+                            active ? 'text-accent-tint' : ''
                           }`}
                         >
                           <span aria-hidden="true" className="tabular w-7 font-sans text-sm text-ink-muted">
@@ -277,7 +277,7 @@ export function SiteHeader() {
                 </ul>
               </nav>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/volunteer" className="inline-flex min-h-12 items-center rounded-[var(--radius-md)] bg-madder px-6 py-3 font-medium text-white">
+                <Link href="/volunteer" className="inline-flex min-h-12 items-center rounded-[var(--radius-md)] bg-accent px-6 py-3 font-medium text-white">
                   Get Involved
                 </Link>
                 <Link

@@ -12,7 +12,7 @@ export function LogoMark({ className, title }: Props) {
       <path
         d="M3 24c4 0 5-8 7-8s3 8 10 8 8-8 10-8 3 8 7 8"
         fill="none"
-        stroke="var(--weft, var(--color-madder))"
+        stroke="var(--weft, var(--color-accent))"
         strokeWidth="3.5"
         strokeLinecap="round"
       />

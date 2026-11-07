@@ -14,7 +14,7 @@ export const campaigns: Campaign[] = [
     supporters: 412,
     startDate: '2026-03-01',
     endDate: '2027-02-28',
-    image: { src: '/images/water-carriers.webp', alt: 'Two women carry water containers on their heads along a dirt track with mountains behind.', position: '50% 50%' },
+    image: { src: '/images/water-carriers.webp', alt: 'Two women carry water containers on their heads along a dirt track with mountains behind.', position: '50% 12%' },
     digitalTool: 'Tapline SMS repair tickets',
     programme: 'water-commons',
     partners: ['Saren Valley water committees (fictional)', 'Valley Mechanics Guild (fictional)'],

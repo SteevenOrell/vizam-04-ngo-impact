@@ -18,7 +18,7 @@ export const programmes: Programme[] = [
       name: 'Tapline',
       text: 'A text-message service: anyone can report a broken tap by SMS, and the mechanic, the committee and Weftline see the same repair ticket.',
     },
-    image: { src: '/images/water-carriers.webp', alt: 'Two women carry water containers along a dirt track with mountains behind.', position: '50% 50%' },
+    image: { src: '/images/water-carriers.webp', alt: 'Two women carry water containers along a dirt track with mountains behind.', position: '50% 12%' },
   },
   {
     slug: 'open-learning',
