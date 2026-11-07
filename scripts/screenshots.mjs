@@ -32,10 +32,12 @@ for (const width of WIDTHS) {
     await page.evaluate(async () => {
       const step = window.innerHeight * 0.7;
       for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
-        window.scrollTo(0, y);
+        window.scrollTo({ left: 0, top: y, behavior: 'instant' });
         await new Promise((r) => setTimeout(r, 120));
       }
-      window.scrollTo(0, 0);
+      // Instant, not smooth: a smooth return left the transparent header mid colour transition in the capture
+      // (grey wordmark on a half-white bar), which looked like a contrast problem at 240 px.
+      window.scrollTo({ left: 0, top: 0, behavior: 'instant' });
     });
     await page.waitForTimeout(900);
     const metrics = await page.evaluate(() => {
