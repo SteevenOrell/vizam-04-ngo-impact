@@ -1,6 +1,6 @@
 # Agent handoff — vizam-04-ngo-impact (Weftline Collective)
 
-_Last updated: 2026-11-06 after Slice C, QA and security sign-off (Claude Opus)_
+_Last updated: 2026-11-06 after redesign Slice 1 (Claude Sonnet)_
 
 ## Objective
 VIZAM portfolio concept: a modern nonprofit website for the fictional NGO **Weftline Collective**, showing campaigns,
@@ -51,7 +51,28 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
   - the limiter is in-memory.
 - Verdict: signed off for preview and PR (not for a real-money or real-data launch).
 
-## Pending
+## Redesign Slice 1 (2026-11-06, Sonnet) — branch `vizam/initial-build`
+Direction: closer to higherlifefoundation.org (see `docs/REFERENCE_ANALYSIS.md`), brown accent kept. Rewritten `docs/design-direction.md` sections 1-4.
+- Tokens in `app/globals.css`: white page, near-black ink, warm-grey band, one brown accent. Legacy token names kept, values remapped (`loom`=white, `loom-deep`=grey band, `turmeric`=light brown tint for dark backgrounds, `indigo`/`moss` = dark neutrals), so inner pages already inherit the palette. Fonts: Outfit (display, light) + Inter. Unlayered `.font-display { font-weight: 400 }` tames legacy `font-bold` headings.
+- Shared UI: `Eyebrow` (brown square bullet, `as` prop), `SectionHeading titleMuted`, `ArrowLink`, new `components/ui/{FeatureCard,ImagePair,PhotoBand}.tsx`; `CampaignCard`, `StatLedger`, `CtaBand`, `PageHero` restyled; `.warp` removed from shared components (kept only on /about avatar).
+- Header (`components/layout/SiteHeader.tsx`): transparent on `/` until 24 px scroll (zero-height sticky wrapper so the concept notice still scrolls away), solid white elsewhere with a 72 px spacer; grouped nav from `navGroups` in `content/site.ts` with disclosure dropdowns; Donate (demo) link; brown "Get Involved" to /volunteer; mobile modal menu unchanged in behaviour. Footer restyled, still shows the fictional label.
+- Home rebuilt (`app/page.tsx`): photo hero (`community-circle.webp`), About + image pair, featured campaign card (Ombra Reading Rooms), photo band, four commitments, programmes, impact (illustrative label kept), news, join CTA.
+- `eslint.config.mjs` now ignores `.claude/**` (a worktree under it made lint scan thousands of foreign files).
+- Test change: `tests/e2e/navigation.spec.ts` opens the "What We Do" dropdown before clicking Campaigns.
+
+### Checks (Slice 1)
+`npm run lint` pass; `npm run typecheck` pass; `npm test` 28/28; `npm run build` pass; `npm run test:e2e` 34/34 (incl. axe on all 12 routes); home at 240/390/768/1440 px via headless Playwright screenshots: no horizontal scroll at 390/768/1440, 240 px locks at 500 px (scrollWidth 500), mobile menu opens with Close, Get Involved and Donate (demo). Not run this slice: `npm audit`, `npm run secret-scan`, `scripts/screenshots.mjs`, portfolio screenshot refresh.
+
+### Known gaps / Slice 2 input
+- Photos are still the old set: the reading-room photo appears twice on home (featured card and latest news); hero text sits on a gradient over a fairly dark crop. Slice 2: find brighter, sharper photos (hero, band, pairs, programme images), update `content/credits.ts`/README.
+- Inner pages only inherit tokens and shared components; they are not yet re-laid out (PageHero is still a split layout, programmes/mission/about/impact/news/volunteer/donate/contact pages use legacy `font-bold`, `text-turmeric`, `display-*` classes; rename legacy tokens).
+- Axe cannot measure text contrast over photographs: hero/band/feature-card text was checked by eye only.
+- `docs/screenshots/` and the README screenshots are from the old design.
+
+## Next step
+Slice 2: inner pages (About, Mission, Programs, Campaigns list/detail, Impact, News list/detail, Volunteer, Donate, Contact) in the new style plus clearer photos (site-media skill; Unsplash/Pixabay only). Then re-run all checks, refresh `docs/screenshots/`.
+
+## Pending (pre-redesign sections below are historical)
 - Nothing in the build or QA scope. The coordinator still has to re-verify, fast-forward, push and open the PR (see Next step).
 
 ## Last verified checks (final tree, Slice C)
@@ -76,7 +97,7 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
 - `npm ci`, `npm run dev` (http://localhost:3104).
 - Env var names: none required.
 
-## Next step
+## Earlier next step (done, PR #1 open)
 Coordinator:
 1. Re-verify on this branch: `npm ci && npm run lint && npm run typecheck && npm test && npm run build && npm run test:e2e && npm run secret-scan && npm audit`.
 2. Fast-forward `vizam/initial-build` to this branch.

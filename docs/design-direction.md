@@ -1,24 +1,27 @@
 # Design direction — Weftline Collective
 
-VIZAM concept project 04 (NGO and social impact). **Fictional organization.** No external design reference was
-supplied, so this direction is original and was written before any code.
+VIZAM concept project 04 (NGO and social impact). **Fictional organization.** Direction revised 2026-11-06 after
+`docs/REFERENCE_ANALYSIS.md`: closer to the editorial, photograph-led feel of higherlifefoundation.org (characteristics
+only, no copied code, assets, text, logo or compositions), **keeping the brown accent**. This supersedes the first
+"indigo, loom and ledger" direction.
 
 ## 1. Brand
 
 **Name:** Weftline Collective (short form: Weftline).
 
 **Idea:** in weaving, the *weft* is the thread that passes across the fixed warp and binds it into cloth. Communities
-are the warp: they were there first and they hold the structure. Weftline's job is to be the crossing thread:
-funding, tools, training and digital services that tie local efforts together without replacing them.
+are the warp; Weftline is the crossing thread: funding, tools, training and digital services that tie local efforts
+together without replacing them. The woven thread survives only as a subtle accent (logo, faint line in two sections).
 
-**Positioning line:** "We are the crossing thread." Supporting line: "Community-led programmes in water, learning,
-livelihoods and climate resilience, woven together with practical digital tools."
+**Positioning line:** "We are the crossing thread."
 
-**Voice:** plain, specific, warm, never pitying. Communities are the subject of sentences ("Farmers in the Saren
-Valley mapped…"), not objects of rescue. No "help them", no "save lives in one click", no guilt.
+**Voice:** plain, specific, warm, never pitying. Communities are the subject of sentences, not objects of rescue.
 
-**Geography:** an invented regional network of places (Saren Valley, Kestrel Coast, Ombra Highlands, Tamsin Delta,
-Lowmere Plains). Using fictional places avoids implying work in real communities that did not happen.
+**Geography:** an invented regional network (Saren Valley, Kestrel Coast, Ombra Highlands, Tamsin Delta, Lowmere Plains).
+
+**Honesty labels (unchanged, mandatory):** "VIZAM concept project — fictional organization" in the top notice and the
+footer; "Illustrative figures for a fictional organization." beside every impact figure; "Demo — no money is taken" on
+donations; forms are labelled demo submissions.
 
 ### Name check (done 2026-11-05)
 
@@ -28,73 +31,66 @@ the WEFT women entrepreneurs' foundation (different name, India), the Worldline 
 (payments company), Weave Foundation (UK charity), "Weft" textile labels and a "GL Weft Linea" hair-extension
 product. A web search cannot rule out a tiny local group; the site is labelled fictional everywhere.
 
-## 2. Why this is not a generic charity template
 
-Generic charity templates share a recognisable kit: orange or red "heart" palette, full-bleed photo of a sad child
-with "Donate now" in a pill button, three icon boxes, a counter strip, a testimonial carousel. Weftline avoids each:
+## 2. Look and feel
 
-| Template habit | Weftline instead |
-|---|---|
-| Pity photography, close-ups of children | Hands, tools, landscapes, groups at work; people photographed as agents, faces never the "need" |
-| Red heart palette | Indigo ink + loom cream, with madder red and turmeric as dye accents |
-| Icon trio | Editorial "ledger" layouts: numbered rows, rules, captions, marginal notes |
-| Animated counters | Static, labelled figures ("illustrative figures for a fictional organization") with a short method note |
-| Donate button everywhere | One quiet persistent donate link; donating is presented as joining a thread, with transparency on allocation |
-| Generic sans | Characterful grotesque display + a typeface designed for legibility |
+- White page, generous whitespace, asymmetric two-column rhythm: label and big title left, narrow body copy (about
+  30 rem) and imagery right.
+- Photography leads: a full-viewport photographic hero with the headline low in the frame, full-bleed photo bands with
+  a large statement, tall image pairs with captions, one rounded feature card per page for the featured item.
+- One accent. Brown marks every primary action, the eyebrow bullets and focus. Everything else is ink, grey or white.
+- Alternate bands in a very light warm grey separate sections; no textures, no ledger rules, no dye tags.
 
-## 3. Signature elements
+## 3. Signature elements (shared UI in `components/ui`)
 
-1. **The thread.** A single SVG line that weaves across key sections (home hero, mission, campaign detail) and is
-   drawn as the visitor scrolls (GSAP ScrollTrigger). With reduced motion the line is simply shown complete.
-2. **Warp texture.** Fine vertical "warp" rules (CSS repeating gradients) behind section headings and the footer;
-   weft accents in dye colours cross them. Pure CSS, no images.
-3. **Ledger typography.** Numbers, dates and regions set in tabular figures on hairline rules, like a field notebook
-   or an annual report. Makes the organization feel accountable rather than salesy.
-4. **Woven progress bar.** Campaign funding progress drawn as interlaced segments rather than a plain pill.
-5. **Dye-tag labels.** Small rectangular tags (theme, status, "Demo", "Illustrative") in dye colours, used
-   consistently for honesty labels so they read as part of the design, not as disclaimers bolted on.
+1. **Eyebrow** with a small brown square bullet (`Eyebrow`; the bullet lightens on dark photo sections).
+2. **Two-tone section titles**: dark first part, grey second part (`SectionHeading titleMuted`, `.title-muted`).
+3. **ArrowLink**: text plus a square brown arrow chip (`ArrowLink`); `ButtonLink` is the filled brown button.
+4. **FeatureCard**: large rounded photo card with gradient, text and one action.
+5. **ImagePair**: two tall captioned photographs, the second offset down.
+6. **PhotoBand**: full-bleed photo with a large overlaid statement.
+7. **Header**: transparent with white text over a photographic hero, solid white after 24 px of scroll; grouped nav
+   (What We Do, About, Insights, Impact, Contact) with accessible disclosure dropdowns, a plain Donate (demo) link and
+   a filled brown "Get Involved" button (to /volunteer). Mobile keeps the modal menu with focus trap.
+8. **Thread accent**: the woven line may appear at low opacity; it never competes with photography.
 
-## 4. Typography
+## 4. Typography and colour
 
-- **Display:** Bricolage Grotesque (variable, Google Fonts). Slightly irregular, humane grotesque; confident at large
-  sizes without corporate coldness. Weights 500–800, tight tracking at display sizes.
-- **Text and UI:** Atkinson Hyperlegible (Braille Institute, Google Fonts). Designed for low-vision readers, which
-  fits an organization that claims to care about access. 400 and 700.
-- **Scale (fluid, clamp):** display 3.0→6.5 rem; h1 2.4→4.5 rem; h2 1.9→3.0 rem; h3 1.3→1.6 rem; body 1.0625 rem
-  (17 px) line-height 1.6; small 0.875 rem. Measure capped at ~68ch for prose.
-- Tabular numerals for figures, dates and money.
-
-## 5. Colour
+- **Display:** Outfit (next/font), a geometric sans, weights 300 to 500. Headings are light/regular, never bold.
+- **Text and UI:** Inter, 400 to 600, 1 rem body at 1.65 line height.
+- **Scale (fluid):** display-xl 2.4 to 4.75 rem, display-lg 2.1 to 3.9 rem, display-md 1.75 to 2.9 rem.
+- **Tokens** (legacy names kept so inner pages keep working until Slice 2 renames them):
 
 | Token | Hex | Use |
 |---|---|---|
-| `ink` | `#16193A` | Primary text, dark sections (indigo ink) |
-| `ink-soft` | `#3A3F66` | Secondary text |
-| `loom` | `#F5F0E6` | Page background (undyed cotton) |
-| `loom-deep` | `#EAE2D2` | Alternate section background |
-| `madder` | `#A8402C` | Primary accent, links on light, CTA (madder root red) — 5.4:1 on loom, 4.75:1 on loom-deep |
-| `turmeric` | `#E2A53A` | Highlight on dark only (contrast-safe on ink) |
-| `indigo` | `#2E3A8C` | Interactive focus, secondary accent |
-| `moss` | `#2F6650` | Success, climate theme |
-| `white` | `#FFFFFF` | Cards |
+| `ink` | `#14120F` | Text, dark footer and menu |
+| `ink-soft` | `#57524B` | Body copy on white (7.7:1) |
+| `ink-muted` | `#CFC8BE` | Muted text on ink |
+| `loom` | `#FFFFFF` | Page |
+| `loom-deep` | `#F5F2ED` | Alternate band |
+| `madder` / `madder-dark` | `#A8402C` / `#8A3322` | The one accent; white text on it is 6.1:1 / 8.2:1 |
+| `turmeric` | `#EFCDBF` | Light brown tint, dark backgrounds only (bullets, links on ink) |
+| `grey-title` | `#8B857D` | Second tone of titles (large text, 3.65:1, AA for large text) |
+| `rule` | `#E4DED5` | Hairlines |
+| `indigo`, `moss` | `#8A3322`, `#3D3832` | Retired as accents; remapped to dark brown / dark neutral |
 
-All text/background pairs used meet WCAG 2.2 AA (4.5:1 body, 3:1 large text and UI). Turmeric is never used for text
-on light backgrounds. Focus rings: 3 px indigo outline + 2 px offset on light, turmeric on dark.
+Photo overlays use only as much black gradient as needed for AA on the text that sits on them.
 
-## 6. Spacing and layout
+## 5. Spacing and layout
 
 - 4 px base unit; section rhythm `clamp(4rem, 9vw, 8rem)`; container max 1240 px with 16–40 px fluid gutters.
 - 12-column grid on desktop with asymmetric editorial splits (5/7, 4/8); single column on mobile.
 - Cards in grids are equal height (CSS grid + flex column, footer pinned to bottom).
 - Radii are small (4–6 px): textile and paper, not app bubbles.
 
-## 7. Photography
+## 6. Photography (clear images)
 
 Unsplash and Pixabay only (public repo). Subjects: collective work, hands with tools, water points, classrooms from
 behind or wide, fields, coastlines, markets, volunteers. Avoid identifiable vulnerable people in distress, avoid
-brand logos. Duotone-friendly: images sit on ink overlays where text overlaps.
+brand logos. Bright, sharp, well-exposed images where the subject reads at once; no dark, blurry, filtered or
+low-contrast pictures; people shown working, learning and building. Overlays only as strong as AA text needs.
 
-## 8. Motion principles
+## 7. Motion principles
 
 - **Purposeful:** motion explains (the thread connects sections; progress fills to its value) or orients (page
   reveal), never decorates for its own sake.
