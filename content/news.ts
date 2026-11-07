@@ -15,7 +15,7 @@ export const newsItems: NewsItem[] = [
       'No experience needed. Boots, gloves and lunch are provided; please bring a hat and water bottle.',
       'Registration is through the Volunteer page (demo form in this concept).',
     ],
-    image: { src: '/images/mangrove-planting.webp', alt: 'A volunteer in a sun hat kneels to plant a young tree.' },
+    image: { src: '/images/seedling-planting.webp', alt: 'Hands firming the soil around a newly planted seedling.' },
     theme: 'climate',
   },
   {

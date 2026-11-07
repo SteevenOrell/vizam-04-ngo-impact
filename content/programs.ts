@@ -75,7 +75,7 @@ export const programmes: Programme[] = [
       name: 'Tideline Maps',
       text: 'Community flood maps drawn on phones during walks along the shore and riverbanks, then printed for village halls.',
     },
-    image: { src: '/images/mangrove-planting.webp', alt: 'A volunteer in a sun hat kneels to plant a young tree.', position: '50% 50%' },
+    image: { src: '/images/seedling-planting.webp', alt: 'Hands firming the soil around a newly planted seedling.', position: '50% 50%' },
   },
   {
     slug: 'digital-commons',

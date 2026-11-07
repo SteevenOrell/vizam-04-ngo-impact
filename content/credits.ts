@@ -73,10 +73,10 @@ export const photoCredits: PhotoCredit[] = [
     "source": "Unsplash"
   },
   {
-    "file": "mangrove-planting.webp",
-    "author": "Dmitry Dreyer",
-    "authorUrl": "https://unsplash.com/@deemwave",
-    "page": "https://unsplash.com/photos/woman-planting-plant-during-daytime-gHho4FE4Ga0",
+    "file": "seedling-planting.webp",
+    "author": "E. Diop",
+    "authorUrl": "https://unsplash.com/@ediop",
+    "page": "https://unsplash.com/photos/a-person-holding-a-plant-XG6Fac3rc2Q",
     "source": "Unsplash"
   },
   {

@@ -44,7 +44,7 @@ export const campaigns: Campaign[] = [
     supporters: 298,
     startDate: '2026-05-15',
     endDate: '2027-11-30',
-    image: { src: '/images/mangrove-planting.webp', alt: 'A volunteer in a sun hat kneels to plant a young tree in the soil.' },
+    image: { src: '/images/seedling-planting.webp', alt: 'Two hands press dry soil around a young seedling as it is planted.' },
     digitalTool: 'Tideline Maps survival counts',
     programme: 'climate-resilience',
     partners: ['Kestrel Fishers’ Cooperative (fictional)', 'Coastal Nursery Collective (fictional)'],

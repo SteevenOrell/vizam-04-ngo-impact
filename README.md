@@ -119,7 +119,7 @@ Photography is from Unsplash ([Unsplash License](https://unsplash.com/license)) 
 | `hero-farmers.webp` | [EqualStock](https://unsplash.com/@equalstock) | [Unsplash](https://unsplash.com/photos/a-group-of-women-standing-next-to-each-other-in-a-field-71L0v2kw424) |
 | `greens-picking.webp` | [EqualStock](https://unsplash.com/@equalstock) | [Unsplash](https://unsplash.com/photos/a-group-of-women-working-in-a-field-0vu32v6BmSg) |
 | `field-harvest.webp` | [EqualStock](https://unsplash.com/@equalstock) | [Unsplash](https://unsplash.com/photos/a-group-of-women-working-in-a-field-7KhazgCqCNA) |
-| `mangrove-planting.webp` | [Dmitry Dreyer](https://unsplash.com/@deemwave) | [Unsplash](https://unsplash.com/photos/woman-planting-plant-during-daytime-gHho4FE4Ga0) |
+| `seedling-planting.webp` | [E. Diop](https://unsplash.com/@ediop) | [Unsplash](https://unsplash.com/photos/a-person-holding-a-plant-XG6Fac3rc2Q) |
 | `riverbank-planting.webp` | [The Tampa Bay Estuary Program](https://unsplash.com/@tbep) | [Unsplash](https://unsplash.com/photos/a-group-of-people-standing-next-to-a-river-CxL29J-aM5E) |
 | `cold-store.webp` | [Paul Einerhand](https://unsplash.com/@pauleinerhand) | [Unsplash](https://unsplash.com/photos/man-in-white-shirt-and-black-pants-standing-beside-yellow-plastic-crates-YkYA4_430Qk) |
 | `garden-tending.webp` | [Jelly Marketing](https://unsplash.com/@jellymarketing) | [Unsplash](https://unsplash.com/photos/teenager-and-woman-gardening-in-backyard-Z98GPfhsx3U) |
