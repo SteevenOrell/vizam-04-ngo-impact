@@ -99,8 +99,9 @@ Contact, volunteer and donate forms are server actions with the same behaviour:
 - Layout verified at 240, 390, 768 and 1440 px with no horizontal scroll from 300 px up and equal-size cards in grids.
 - Below 250 px the layout locks at 500 px and the visitor pans (`#root` and fixed elements are 500 px wide,
   `html { overflow-x: auto }`; the mobile menu overlay pans so Close stays reachable).
-- axe-core passes on every page after the redesign. The full WCAG review and security sign-off are pending a re-run
-  after the redesign; see [`docs/report.md`](docs/report.md).
+- axe-core passes on every page after the redesign, text over photos meets WCAG AA contrast, and the WCAG 2.2 AA and
+  security review was re-run on the redesigned tree (signed off for preview, not for a real-money or real-data launch);
+  see [`docs/report.md`](docs/report.md).
 
 ## Photo credits
 

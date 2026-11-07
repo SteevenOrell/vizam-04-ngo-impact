@@ -1,6 +1,6 @@
 # Agent handoff — vizam-04-ngo-impact (Weftline Collective)
 
-_Last updated: 2026-11-06 after redesign Slice 3 (Claude Sonnet)_
+_Last updated: 2026-11-06 after the final QA and security sign-off on the redesign (Claude Opus)_
 
 ## Objective
 VIZAM portfolio concept: a modern nonprofit website for the fictional NGO **Weftline Collective**, showing campaigns,
@@ -8,9 +8,9 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
 "VIZAM concept project — fictional organization". Not a real client.
 
 ## Repository
-- Path (this worktree): `vizam-04-ngo-impact/.claude/worktrees/agent-acc6d7b95be2d9852`
-- Main checkout: `vizam-04-ngo-impact` on branch `vizam/initial-build`. Remote: `origin` (GitHub, PUBLIC, `main` holds only the empty initial commit).
-- Branch: `worktree-agent-acc6d7b95be2d9852` (see `git log -1` for the head commit)
+- Path: `C:\Users\SteevenWemin\Documents\Projects\vizam-04-ngo-impact` (main checkout), branch `vizam/initial-build`
+  (PR #1 open into `main`; redesign and QA commits are local, not pushed). Remote: `origin` (GitHub, PUBLIC, `main`
+  holds only the empty initial commit). See `git log -1` for the head commit.
 - `.claude/` must never be committed: it is in `.gitignore` here and in `.git/info/exclude` of the main checkout.
 
 ## Approved decisions
@@ -81,24 +81,41 @@ Direction: closer to higherlifefoundation.org (see `docs/REFERENCE_ANALYSIS.md`)
 ### Checks (Slice 3, 2026-11-06)
 lint pass; typecheck pass; npm test 28/28; build pass; test:e2e 34/34; secret-scan no findings (111 files, 23 commits, 180 blobs); npm audit 0 vulnerabilities; screenshots.mjs: no h-scroll >=300 px, no unequal rows, 240 px lock OK on every route. Not re-run: headers, keyboard/focus, reduced-motion probes.
 
+## Final QA and security sign-off on the redesign (2026-11-06, Opus)
+Commits `34deb10`..(this docs commit). Fixes:
+- 240 px header "faint wordmark" was a screenshot artefact (smooth scroll back to top left the header mid colour
+  transition). `scripts/screenshots.mjs` now scrolls instantly. Live contrast of the header text is >= 7.4:1 at 240 px.
+  New e2e tests: desktop dropdown keyboard + Escape; 240 px transparent header white on scrim, solid after scroll.
+- Donate: empty "Other amount" now focuses the amount field; allocation select has `aria-describedby` (e2e added).
+- Photos: `mangrove-planting.webp` had a visible energy-drink logo on a sleeve; replaced by `seedling-planting.webp`
+  (Unsplash, E. Diop) in campaigns/news/programs with new alt text, credits in `content/credits.ts`,
+  `public/images/CREDITS.md` and README. `code-club.webp` cropped 130 px on the left to remove a faint monitor logo.
+- Contrast: eyebrow labels over bright photo areas were 2.7-3.9:1 (p95); scrims darkened in `FeatureCard` and
+  `PhotoBand`; every text over a photo now passes AA at 240/390/768/1440.
+- e2e: campaign-to-donate URL assertion timeout 15 s (cold on-demand `/donate` render flaked once at 5 s).
+- `docs/screenshots/` refreshed; README accessibility note and `docs/report.md` (checks, security, sign-off) updated.
+Verdict: signed off for Vercel preview and PR #1; not for a real-money or real-data launch.
+
 ## Next step
-Opus QA and security sign-off on the redesigned tree: re-run headers, keyboard/focus, reduced motion, contrast over photos, forms; consider the 240 px header contrast; then the coordinator pushes the branch (PR #1 already open) after `npm run secret-scan`.
+Coordinator: re-verify on `vizam/initial-build` (`npm ci && npm run lint && npm run typecheck && npm test && npm run build && npm run test:e2e && npm run secret-scan && npm audit`), then push the branch to update PR #1. Do not merge without Steeven's approval.
 
-## Pending (pre-redesign sections below are historical)
-- Nothing in the build or QA scope. The coordinator still has to re-verify, fast-forward, push and open the PR (see Next step).
+## Pending (pre-redesign sections above are historical)
+- Nothing in the build or QA scope. Push, Vercel preview link and merge are for the coordinator/Steeven.
 
-## Last verified checks (final tree, Slice C)
-| Check | Command | Result | When |
-|---|---|---|---|
-| Lint | `npm run lint` | pass (no output) | 2026-11-06 |
-| Typecheck | `npm run typecheck` | pass | 2026-11-06 |
-| Unit tests | `npm test` | pass: 3 files, 28 tests | 2026-11-06 |
-| Build | `npm run build` | pass, 38 pages | 2026-11-06 |
-| E2E + axe | `npm run test:e2e` (next start, port 3104) | pass: 34/34 | 2026-11-06 |
-| Screenshots/layout | `node scripts/screenshots.mjs` | no h-scroll >=300 px, no unequal rows; 240 px lock OK and panX=200 on every route | 2026-11-06 |
-| Audit | `npm audit` | 0 vulnerabilities | 2026-11-06 |
-| Secret scan | `npm run secret-scan` | no findings (129 files, 16 commits, 108 text blobs) | 2026-11-06 |
-| Headers | `curl -I` on `next start` | CSP, nosniff, DENY, Referrer, Permissions, HSTS, COOP; no X-Powered-By | 2026-11-06 |
+## Last verified checks (final redesigned tree, 2026-11-06, Opus)
+| Check | Command | Result |
+|---|---|---|
+| Install | `npm ci` | pass, 0 vulnerabilities |
+| Lint | `npm run lint` | pass (no output) |
+| Typecheck | `npm run typecheck` | pass |
+| Unit tests | `npm test` | pass: 3 files, 28 tests |
+| Build | `npm run build` | pass, 38 pages |
+| E2E + axe | `npm run test:e2e` (port 3104) | pass: 36/36 (first run 35/36: cold `/donate` URL wait timed out at 5 s; fixed with a 15 s timeout, 2 later full runs green) |
+| Screenshots/layout | `node scripts/screenshots.mjs` (13 routes) | no h-scroll >=300 px, no unequal rows; 240 px lock OK and panX=200 on every route; menu opens at 240/390/768 |
+| Contrast over photos | Playwright probe (scratchpad, not in repo) | all pass AA at 4 widths after scrim fix |
+| Audit | `npm audit` | 0 vulnerabilities |
+| Secret scan | `npm run secret-scan` | no findings (138 files, 30 commits, 198 text blobs) |
+| Headers | `curl -I` on `next start` | CSP, nosniff, DENY, Referrer, Permissions, HSTS, COOP; no X-Powered-By |
 
 ## Known issues and risks
 - `.claude/` must never be committed.
