@@ -68,6 +68,10 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
         if (res.fieldErrors) for (const [f, m] of Object.entries(res.fieldErrors)) setError(f as keyof DonationInput, { type: 'server', message: m });
       }
     });
+  }, (errs) => {
+    // The custom amount is a controlled input outside register(), so react-hook-form cannot focus it itself.
+    // Move focus there so the error (linked by aria-describedby) is announced, like the other forms.
+    if (errs.amount && choice === 'other') document.getElementById('custom-amount')?.focus();
   });
 
   function startAgain() {
@@ -243,7 +247,7 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
               <label htmlFor="allocation" className="mb-1.5 block font-medium">
                 3. Where should it go?
               </label>
-              <select id="allocation" className={inputClass} aria-invalid={errors.allocation ? true : undefined} {...register('allocation')}>
+              <select id="allocation" className={inputClass} aria-invalid={errors.allocation ? true : undefined} aria-describedby={errors.allocation ? 'allocation-error' : undefined} {...register('allocation')}>
                 {ALLOCATIONS.map((a) => (
                   <option key={a} value={a}>
                     {allocationLabel(a)}

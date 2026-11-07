@@ -55,6 +55,12 @@ test('donation demo: clear demo labelling, no payment fields, custom amount, rec
 
   await page.getByLabel('Monthly').check({ force: true });
   await page.getByLabel('Other amount').check();
+  // Submitting an empty custom amount focuses that field, which points at its error.
+  await page.getByRole('button', { name: 'Complete demo donation' }).click();
+  const customAmount = page.getByLabel('Amount in US dollars');
+  await expect(customAmount).toBeFocused();
+  await expect(customAmount).toHaveAttribute('aria-invalid', 'true');
+  await expect(customAmount).toHaveAttribute('aria-describedby', /amount-error/);
   await page.getByLabel('Amount in US dollars').fill('3');
   await expect(page.getByText('The minimum demo amount is $5.')).toBeVisible();
   await page.getByLabel('Amount in US dollars').fill('42.50');
