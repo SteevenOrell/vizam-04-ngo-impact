@@ -1,18 +1,12 @@
 import type { Metadata, Viewport } from 'next';
-import { Atkinson_Hyperlegible_Next, Bricolage_Grotesque } from 'next/font/google';
+import { Inter, Outfit } from 'next/font/google';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { site } from '@/content/site';
 import './globals.css';
 
-const display = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-bricolage', display: 'swap' });
-const text = Atkinson_Hyperlegible_Next({
-  subsets: ['latin'],
-  variable: '--font-atkinson',
-  display: 'swap',
-  adjustFontFallback: false,
-  fallback: ['Segoe UI', 'system-ui', 'sans-serif'],
-});
+const display = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap', weight: ['300', '400', '500'] });
+const text = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -30,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#16193a',
+  themeColor: '#14120f',
   width: 'device-width',
   initialScale: 1,
 };
@@ -42,12 +36,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <div id="root" className="flex min-h-screen flex-col">
           <a
             href="#main"
-            className="sr-only-focusable absolute left-4 top-3 z-[60] rounded-[var(--radius-md)] bg-ink px-4 py-3 font-bold text-loom"
+            className="sr-only-focusable absolute left-4 top-3 z-[60] rounded-[var(--radius-md)] bg-ink px-4 py-3 font-medium text-white"
           >
             Skip to main content
           </a>
-          <p className="bg-ink px-4 py-1.5 text-center text-[0.8125rem] font-bold text-loom">
-            <span className="text-turmeric">VIZAM concept project</span> — Weftline Collective is a fictional organization.
+          <p className="bg-ink px-4 py-1.5 text-center text-[0.8125rem] font-medium text-white">
+            <span className="text-accent-tint">VIZAM concept project</span> — Weftline Collective is a fictional organization.
           </p>
           <SiteHeader />
           <main id="main" tabIndex={-1} className="flex-1 outline-none">

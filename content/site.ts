@@ -27,6 +27,31 @@ export const navItems = [
   { href: '/contact', label: 'Contact' },
 ] as const;
 
+/** Grouped navigation for the header: dropdown groups (items) or plain links (href). */
+export const navGroups: readonly (
+  | { label: string; items: readonly { href: string; label: string; hint: string }[] }
+  | { label: string; href: string }
+)[] = [
+  {
+    label: 'What We Do',
+    items: [
+      { href: '/programs', label: 'Programs', hint: 'Five programmes, one cloth' },
+      { href: '/campaigns', label: 'Campaigns', hint: 'Where the thread is moving now' },
+      { href: '/volunteer', label: 'Volunteer', hint: 'Give time and skills' },
+    ],
+  },
+  {
+    label: 'About',
+    items: [
+      { href: '/about', label: 'About', hint: 'Who we are' },
+      { href: '/mission', label: 'Our Mission', hint: 'How and why we work' },
+    ],
+  },
+  { label: 'Insights', href: '/news' },
+  { label: 'Impact', href: '/impact' },
+  { label: 'Contact', href: '/contact' },
+];
+
 export const themeLabels: Record<Theme, string> = {
   water: 'Water',
   learning: 'Learning',

@@ -54,7 +54,7 @@ export function CampaignFilters({ values }: { values: Values }) {
 
   const hasFilters = Boolean(values.theme || values.region || values.status || values.q);
   const select =
-    'min-h-12 w-full appearance-none rounded-[var(--radius-md)] border-2 border-ink/70 bg-white bg-[length:16px] bg-[right_0.75rem_center] bg-no-repeat px-3 pr-9 font-bold';
+    'min-h-12 w-full appearance-none rounded-[var(--radius-md)] border-2 border-ink/70 bg-white bg-[length:16px] bg-[right_0.75rem_center] bg-no-repeat px-3 pr-9 font-medium';
   const chevron = {
     backgroundImage:
       "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316193a' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
@@ -67,21 +67,21 @@ export function CampaignFilters({ values }: { values: Values }) {
       action="/campaigns"
       role="search"
       aria-label="Filter campaigns"
-      className="rounded-[var(--radius-md)] border border-rule bg-loom-deep/60 p-4 sm:p-5"
+      className="rounded-[var(--radius-card)] bg-band p-5 sm:p-7"
       onSubmit={(e) => {
         e.preventDefault();
         clearTimeout(timer.current);
         apply();
       }}
     >
-      <p className="mb-4 flex items-center gap-2 font-bold">
+      <p className="mb-4 flex items-center gap-2 font-medium">
         <SlidersHorizontal aria-hidden="true" className="h-4 w-4" />
         Filter campaigns
         {pending && <span className="text-sm font-normal text-ink-soft">Updating…</span>}
       </p>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <label htmlFor="filter-q" className="mb-1.5 block text-sm font-bold">
+          <label htmlFor="filter-q" className="mb-1.5 block text-sm font-medium">
             Search
           </label>
           <div className="relative">
@@ -105,7 +105,7 @@ export function CampaignFilters({ values }: { values: Values }) {
           </div>
         </div>
         <div>
-          <label htmlFor="filter-theme" className="mb-1.5 block text-sm font-bold">
+          <label htmlFor="filter-theme" className="mb-1.5 block text-sm font-medium">
             Theme
           </label>
           <select id="filter-theme" name="theme" value={theme} onChange={(e) => { setTheme(e.target.value); apply({ theme: e.target.value || undefined }); }} className={select} style={chevron}>
@@ -118,7 +118,7 @@ export function CampaignFilters({ values }: { values: Values }) {
           </select>
         </div>
         <div>
-          <label htmlFor="filter-region" className="mb-1.5 block text-sm font-bold">
+          <label htmlFor="filter-region" className="mb-1.5 block text-sm font-medium">
             Region
           </label>
           <select id="filter-region" name="region" value={region} onChange={(e) => { setRegion(e.target.value); apply({ region: e.target.value || undefined }); }} className={select} style={chevron}>
@@ -131,7 +131,7 @@ export function CampaignFilters({ values }: { values: Values }) {
           </select>
         </div>
         <div>
-          <label htmlFor="filter-status" className="mb-1.5 block text-sm font-bold">
+          <label htmlFor="filter-status" className="mb-1.5 block text-sm font-medium">
             Status
           </label>
           <select id="filter-status" name="status" value={status} onChange={(e) => { setStatus(e.target.value); apply({ status: e.target.value || undefined }); }} className={select} style={chevron}>
@@ -145,14 +145,14 @@ export function CampaignFilters({ values }: { values: Values }) {
         </div>
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <button type="submit" className="inline-flex min-h-11 items-center rounded-[var(--radius-md)] bg-ink px-4 font-bold text-loom hover:bg-indigo">
+        <button type="submit" className="inline-flex min-h-11 items-center rounded-[var(--radius-md)] bg-accent px-5 font-medium text-white hover:bg-accent-dark">
           Apply filters
         </button>
         {hasFilters && (
           <Link
             href="/campaigns"
             scroll={false}
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-[var(--radius-md)] px-2 font-bold underline decoration-madder decoration-2 underline-offset-4"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-[var(--radius-md)] px-2 font-medium underline decoration-accent decoration-2 underline-offset-4"
           >
             <X aria-hidden="true" className="h-4 w-4" />
             Clear all filters

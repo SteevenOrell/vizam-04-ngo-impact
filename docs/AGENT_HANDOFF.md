@@ -1,6 +1,6 @@
 # Agent handoff — vizam-04-ngo-impact (Weftline Collective)
 
-_Last updated: 2026-11-06 after Slice C, QA and security sign-off (Claude Opus)_
+_Last updated: 2026-11-06 after the final QA and security sign-off on the redesign (Claude Opus)_
 
 ## Objective
 VIZAM portfolio concept: a modern nonprofit website for the fictional NGO **Weftline Collective**, showing campaigns,
@@ -8,9 +8,9 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
 "VIZAM concept project — fictional organization". Not a real client.
 
 ## Repository
-- Path (this worktree): `vizam-04-ngo-impact/.claude/worktrees/agent-acc6d7b95be2d9852`
-- Main checkout: `vizam-04-ngo-impact` on branch `vizam/initial-build`. Remote: `origin` (GitHub, PUBLIC, `main` holds only the empty initial commit).
-- Branch: `worktree-agent-acc6d7b95be2d9852` (see `git log -1` for the head commit)
+- Path: `C:\Users\SteevenWemin\Documents\Projects\vizam-04-ngo-impact` (main checkout), branch `vizam/initial-build`
+  (PR #1 open into `main`; redesign and QA commits are local, not pushed). Remote: `origin` (GitHub, PUBLIC, `main`
+  holds only the empty initial commit). See `git log -1` for the head commit.
 - `.claude/` must never be committed: it is in `.gitignore` here and in `.git/info/exclude` of the main checkout.
 
 ## Approved decisions
@@ -51,21 +51,71 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
   - the limiter is in-memory.
 - Verdict: signed off for preview and PR (not for a real-money or real-data launch).
 
-## Pending
-- Nothing in the build or QA scope. The coordinator still has to re-verify, fast-forward, push and open the PR (see Next step).
+## Redesign Slice 1 (2026-11-06, Sonnet) — branch `vizam/initial-build`
+Direction: closer to higherlifefoundation.org (see `docs/REFERENCE_ANALYSIS.md`), brown accent kept. Rewritten `docs/design-direction.md` sections 1-4.
+- Tokens in `app/globals.css`: white page, near-black ink, warm-grey band, one brown accent. Legacy token names kept, values remapped (`loom`=white, `loom-deep`=grey band, `turmeric`=light brown tint for dark backgrounds, `indigo`/`moss` = dark neutrals), so inner pages already inherit the palette. Fonts: Outfit (display, light) + Inter. Unlayered `.font-display { font-weight: 400 }` tames legacy `font-bold` headings.
+- Shared UI: `Eyebrow` (brown square bullet, `as` prop), `SectionHeading titleMuted`, `ArrowLink`, new `components/ui/{FeatureCard,ImagePair,PhotoBand}.tsx`; `CampaignCard`, `StatLedger`, `CtaBand`, `PageHero` restyled; `.warp` removed from shared components (kept only on /about avatar).
+- Header (`components/layout/SiteHeader.tsx`): transparent on `/` until 24 px scroll (zero-height sticky wrapper so the concept notice still scrolls away), solid white elsewhere with a 72 px spacer; grouped nav from `navGroups` in `content/site.ts` with disclosure dropdowns; Donate (demo) link; brown "Get Involved" to /volunteer; mobile modal menu unchanged in behaviour. Footer restyled, still shows the fictional label.
+- Home rebuilt (`app/page.tsx`): photo hero (`community-circle.webp`), About + image pair, featured campaign card (Ombra Reading Rooms), photo band, four commitments, programmes, impact (illustrative label kept), news, join CTA.
+- `eslint.config.mjs` now ignores `.claude/**` (a worktree under it made lint scan thousands of foreign files).
+- Test change: `tests/e2e/navigation.spec.ts` opens the "What We Do" dropdown before clicking Campaigns.
 
-## Last verified checks (final tree, Slice C)
-| Check | Command | Result | When |
-|---|---|---|---|
-| Lint | `npm run lint` | pass (no output) | 2026-11-06 |
-| Typecheck | `npm run typecheck` | pass | 2026-11-06 |
-| Unit tests | `npm test` | pass: 3 files, 28 tests | 2026-11-06 |
-| Build | `npm run build` | pass, 38 pages | 2026-11-06 |
-| E2E + axe | `npm run test:e2e` (next start, port 3104) | pass: 34/34 | 2026-11-06 |
-| Screenshots/layout | `node scripts/screenshots.mjs` | no h-scroll >=300 px, no unequal rows; 240 px lock OK and panX=200 on every route | 2026-11-06 |
-| Audit | `npm audit` | 0 vulnerabilities | 2026-11-06 |
-| Secret scan | `npm run secret-scan` | no findings (129 files, 16 commits, 108 text blobs) | 2026-11-06 |
-| Headers | `curl -I` on `next start` | CSP, nosniff, DENY, Referrer, Permissions, HSTS, COOP; no X-Powered-By | 2026-11-06 |
+### Checks (Slice 1)
+`npm run lint` pass; `npm run typecheck` pass; `npm test` 28/28; `npm run build` pass; `npm run test:e2e` 34/34 (incl. axe on all 12 routes); home at 240/390/768/1440 px via headless Playwright screenshots: no horizontal scroll at 390/768/1440, 240 px locks at 500 px (scrollWidth 500), mobile menu opens with Close, Get Involved and Donate (demo). Not run this slice: `npm audit`, `npm run secret-scan`, `scripts/screenshots.mjs`, portfolio screenshot refresh.
+
+## Redesign Slice 2 (2026-11-06, Sonnet) — photos and inner pages
+- Photos: audited all 21; kept 7 (classroom, community-build, community-circle, volunteers-riverbank, solar-valley, highland-terraces, market); deleted 14 dark/blurry/filtered/ambiguous ones; added 15 new (Unsplash + 1 Pixabay): hero-farmers, greens-picking, field-harvest, mangrove-planting, riverbank-planting, code-club, cold-store, garden-tending, flood-maps, seed-grain, water-carriers, volunteer-lead, team-review, bean-sorting, tree-planting. 22 WebP in `public/images`; `content/credits.ts`, `public/images/CREDITS.md` and the README credits table regenerated (source is now Unsplash or Pixabay). Campaigns (10), news (12) and programmes (5) each have a distinct photo within their list; home no longer repeats a photo (latest-news picker skips the featured campaign's image). code-club is cropped to hide laptop logos.
+- Colour tokens renamed everywhere: `page`, `band`, `accent`, `accent-dark`, `accent-tint`, `graphite`, `title-grey` (old loom/madder/turmeric/indigo/moss gone). `font-bold` removed; type scale classes renamed `heading-xl/lg/md`; Tag tones are `accent|ink|graphite|deep|tint|outline|grey`. `.warp`, `.ledger-rule`, `.prose-measure` removed.
+- New helpers `Section` and `Split` in `components/ui/primitives.tsx`. `PageHero` is now light: eyebrow, two-tone title, narrow lede, optional wide rounded photo (priority, no text on the photo). Cards (campaign, news) are borderless with rounded photo, equal height.
+- Re-laid out in the new style: About, Mission, Programs, Campaigns list and detail (light funding card, hero photo), Impact, News list and detail, Volunteer (photo band), Donate, Contact, 404. Home hero uses hero-farmers with a top scrim (nav) and a strengthened bottom gradient. Honesty labels and all form behaviour unchanged (forms not touched except token renames).
+- Contrast over photos measured with a Playwright probe (hides text, samples the pixels behind each text element, 98th-percentile luminance vs text colour) on /, /about, /mission, /impact, /volunteer at 390 and 1440 px: all hero, band and feature-card text passes AA (one false alarm on the white mobile "Menu" label, which is clearly legible; probe artifact). Probe script lived in the session scratchpad, not in the repo.
+
+### Checks (Slice 2)
+`npm run lint` pass; `npm run typecheck` pass; `npm test` 28/28; `npm run build` pass; `npm run test:e2e` 34/34 (axe on all routes, no assertion changes needed); `npm audit` 0 vulnerabilities; `npm run secret-scan` no findings. `scripts/screenshots.mjs` on 14 routes x 240/390/768/1440: no horizontal scroll at 390/768/1440, no unequal card rows, 240 px locks (scrollWidth 500, root 500, html overflow-x auto, fixedNot500=0, panX=200) on every route, menu overlay opens at 240/390/768.
+
+## Redesign Slice 3 (2026-11-06, Sonnet) - docs and screenshots
+- `docs/screenshots/` regenerated from a fresh build (27 WebP, ~2.8 MB): Home, Campaigns, campaign detail, Donate, Volunteer, About at 240/390/768/1440 plus menu-open at 240/390/768. `scripts/compress-screenshots.mjs` now includes About, quality 60, crop 2600 px. Old screenshots deleted; raw PNGs in git-ignored `screenshots-raw/`.
+- Looked at home 1440/390/240, campaign detail 1440/390 and the 390 menu: photos clear and bright, text readable, nothing broken. Observations: at 240 px the grey wordmark and Menu label are faint on the pale sky of the transparent header; wide screens leave empty space under the About heading (home) and under the funding card (campaign detail). No code changed.
+- README (design section, screenshots, structure, accessibility wording), `docs/report.md` (design summary, reference analysis note: home page only, status, checks, limitations, 111-word blurb). Security/QA sign-off marked pending re-run after redesign (Opus).
+
+### Checks (Slice 3, 2026-11-06)
+lint pass; typecheck pass; npm test 28/28; build pass; test:e2e 34/34; secret-scan no findings (111 files, 23 commits, 180 blobs); npm audit 0 vulnerabilities; screenshots.mjs: no h-scroll >=300 px, no unequal rows, 240 px lock OK on every route. Not re-run: headers, keyboard/focus, reduced-motion probes.
+
+## Final QA and security sign-off on the redesign (2026-11-06, Opus)
+Commits `34deb10`..(this docs commit). Fixes:
+- 240 px header "faint wordmark" was a screenshot artefact (smooth scroll back to top left the header mid colour
+  transition). `scripts/screenshots.mjs` now scrolls instantly. Live contrast of the header text is >= 7.4:1 at 240 px.
+  New e2e tests: desktop dropdown keyboard + Escape; 240 px transparent header white on scrim, solid after scroll.
+- Donate: empty "Other amount" now focuses the amount field; allocation select has `aria-describedby` (e2e added).
+- Photos: `mangrove-planting.webp` had a visible energy-drink logo on a sleeve; replaced by `seedling-planting.webp`
+  (Unsplash, E. Diop) in campaigns/news/programs with new alt text, credits in `content/credits.ts`,
+  `public/images/CREDITS.md` and README. `code-club.webp` cropped 130 px on the left to remove a faint monitor logo.
+- Contrast: eyebrow labels over bright photo areas were 2.7-3.9:1 (p95); scrims darkened in `FeatureCard` and
+  `PhotoBand`; every text over a photo now passes AA at 240/390/768/1440.
+- e2e: campaign-to-donate URL assertion timeout 15 s (cold on-demand `/donate` render flaked once at 5 s).
+- `docs/screenshots/` refreshed; README accessibility note and `docs/report.md` (checks, security, sign-off) updated.
+Verdict: signed off for Vercel preview and PR #1; not for a real-money or real-data launch.
+
+## Next step
+Coordinator: re-verify on `vizam/initial-build` (`npm ci && npm run lint && npm run typecheck && npm test && npm run build && npm run test:e2e && npm run secret-scan && npm audit`), then push the branch to update PR #1. Do not merge without Steeven's approval.
+
+## Pending (pre-redesign sections above are historical)
+- Nothing in the build or QA scope. Push, Vercel preview link and merge are for the coordinator/Steeven.
+
+## Last verified checks (final redesigned tree, 2026-11-06, Opus)
+| Check | Command | Result |
+|---|---|---|
+| Install | `npm ci` | pass, 0 vulnerabilities |
+| Lint | `npm run lint` | pass (no output) |
+| Typecheck | `npm run typecheck` | pass |
+| Unit tests | `npm test` | pass: 3 files, 28 tests |
+| Build | `npm run build` | pass, 38 pages |
+| E2E + axe | `npm run test:e2e` (port 3104) | pass: 36/36 (first run 35/36: cold `/donate` URL wait timed out at 5 s; fixed with a 15 s timeout, 2 later full runs green) |
+| Screenshots/layout | `node scripts/screenshots.mjs` (13 routes) | no h-scroll >=300 px, no unequal rows; 240 px lock OK and panX=200 on every route; menu opens at 240/390/768 |
+| Contrast over photos | Playwright probe (scratchpad, not in repo) | all pass AA at 4 widths after scrim fix |
+| Audit | `npm audit` | 0 vulnerabilities |
+| Secret scan | `npm run secret-scan` | no findings (138 files, 30 commits, 198 text blobs) |
+| Headers | `curl -I` on `next start` | CSP, nosniff, DENY, Referrer, Permissions, HSTS, COOP; no X-Powered-By |
 
 ## Known issues and risks
 - `.claude/` must never be committed.
@@ -76,7 +126,7 @@ fundraising (demo only), volunteering and public engagement. Fictional brand, cl
 - `npm ci`, `npm run dev` (http://localhost:3104).
 - Env var names: none required.
 
-## Next step
+## Earlier next step (done, PR #1 open)
 Coordinator:
 1. Re-verify on this branch: `npm ci && npm run lint && npm run typecheck && npm test && npm run build && npm run test:e2e && npm run secret-scan && npm audit`.
 2. Fast-forward `vizam/initial-build` to this branch.

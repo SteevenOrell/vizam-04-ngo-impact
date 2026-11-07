@@ -4,12 +4,12 @@ import { forwardRef, useCallback, type ComponentProps, type ReactNode } from 're
 import { AlertCircle, CheckCircle2, FlaskConical } from 'lucide-react';
 
 export const inputClass =
-  'block min-h-12 w-full rounded-[var(--radius-md)] border-2 border-ink/70 bg-white px-3 py-2 text-ink placeholder:text-ink-soft aria-[invalid=true]:border-madder';
+  'block min-h-12 w-full rounded-[var(--radius-md)] border-2 border-ink/70 bg-white px-3 py-2 text-ink placeholder:text-ink-soft aria-[invalid=true]:border-accent';
 
 export function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} className="mt-1.5 flex items-start gap-1.5 text-sm font-bold text-madder">
+    <p id={id} className="mt-1.5 flex items-start gap-1.5 text-sm font-medium text-accent">
       <AlertCircle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" />
       {message}
     </p>
@@ -21,7 +21,7 @@ type FieldShellProps = { id: string; label: string; hint?: string; error?: strin
 export function FieldShell({ id, label, hint, error, optional, children }: FieldShellProps) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block font-bold">
+      <label htmlFor={id} className="mb-1.5 block font-medium">
         {label} {optional && <span className="font-normal text-ink-soft">(optional)</span>}
       </label>
       {hint && (
@@ -98,8 +98,8 @@ export const Honeypot = forwardRef<HTMLInputElement, ComponentProps<'input'>>(fu
 
 export function DemoFormNotice({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-start gap-3 rounded-[var(--radius-md)] border-2 border-dashed border-indigo bg-white p-4 text-sm">
-      <FlaskConical aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-indigo" />
+    <div className="flex items-start gap-3 rounded-[var(--radius-md)] border-2 border-dashed border-accent-dark bg-white p-4 text-sm">
+      <FlaskConical aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-accent-dark" />
       <div>{children}</div>
     </div>
   );
@@ -116,8 +116,8 @@ export function FormMessage({ tone, children, id, focusOnMount = false }: { tone
       ref={ref}
       id={id}
       tabIndex={-1}
-      className={`flex items-start gap-3 rounded-[var(--radius-md)] border-2 p-4 font-bold outline-none ${
-        tone === 'success' ? 'border-moss bg-white text-moss' : 'border-madder bg-white text-madder'
+      className={`flex items-start gap-3 rounded-[var(--radius-md)] border-2 p-4 font-medium outline-none ${
+        tone === 'success' ? 'border-graphite bg-white text-graphite' : 'border-accent bg-white text-accent'
       }`}
     >
       <Icon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0" />

@@ -19,7 +19,7 @@ type Props = {
  * The Weftline "thread": a line drawn as the visitor scrolls. Server-rendered fully drawn, so it is visible without
  * JavaScript and with reduced motion; GSAP only takes over when motion is allowed.
  */
-export function ThreadLine({ d, className = '', color = 'var(--color-madder)', width = 3, start = 'top 85%', end = 'bottom 35%' }: Props) {
+export function ThreadLine({ d, className = '', color = 'var(--color-accent)', width = 3, start = 'top 85%', end = 'bottom 35%' }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
 

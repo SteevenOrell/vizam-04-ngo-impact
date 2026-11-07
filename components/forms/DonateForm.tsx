@@ -68,6 +68,10 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
         if (res.fieldErrors) for (const [f, m] of Object.entries(res.fieldErrors)) setError(f as keyof DonationInput, { type: 'server', message: m });
       }
     });
+  }, (errs) => {
+    // The custom amount is a controlled input outside register(), so react-hook-form cannot focus it itself.
+    // Move focus there so the error (linked by aria-describedby) is announced, like the other forms.
+    if (errs.amount && choice === 'other') document.getElementById('custom-amount')?.focus();
   });
 
   function startAgain() {
@@ -82,7 +86,7 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
 
   return (
     <div className="overflow-hidden rounded-[var(--radius-md)] border-2 border-ink bg-white">
-      <div className="flex items-start gap-3 bg-indigo px-5 py-4 text-white" id="demo-banner">
+      <div className="flex items-start gap-3 bg-accent-dark px-5 py-4 text-white" id="demo-banner">
         <FlaskConical aria-hidden="true" className="mt-0.5 h-6 w-6 shrink-0" />
         <p>
           <strong className="block text-lg">Demo — no money is taken.</strong>
@@ -101,12 +105,12 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
             className="p-5 sm:p-8"
           >
             <div id="donation-receipt" ref={(el) => el?.focus()} tabIndex={-1} role="status" className="outline-none">
-              <p className="flex items-center gap-2 font-bold text-moss">
+              <p className="flex items-center gap-2 font-medium text-graphite">
                 <BadgeCheck aria-hidden="true" className="h-6 w-6" />
                 Demo donation complete
               </p>
-              <h2 className="display-md mt-3">Thank you for trying the demo.</h2>
-              <p className="mt-3 text-lg font-bold">No money has been taken and no payment details were requested.</p>
+              <h2 className="heading-md mt-3">Thank you for trying the demo.</h2>
+              <p className="mt-3 text-lg font-medium">No money has been taken and no payment details were requested.</p>
             </div>
             <dl className="tabular mt-6 grid gap-px overflow-hidden rounded-[var(--radius-md)] border border-rule bg-rule sm:grid-cols-2">
               {[
@@ -115,9 +119,9 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
                 ['Frequency', receipt.frequency === 'monthly' ? 'Monthly' : 'One-time'],
                 ['Allocated to', receipt.allocation],
               ].map(([k, v]) => (
-                <div key={k} className="bg-loom p-4">
+                <div key={k} className="bg-page p-4">
                   <dt className="text-sm text-ink-soft">{k}</dt>
-                  <dd className="mt-1 font-bold">{v}</dd>
+                  <dd className="mt-1 font-medium">{v}</dd>
                 </div>
               ))}
             </dl>
@@ -146,7 +150,7 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
                 }
               }}
               tabIndex={-1}
-              className="display-md outline-none"
+              className="heading-md outline-none"
             >
               Choose a demo gift
             </h2>
@@ -158,12 +162,12 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
             )}
 
             <fieldset>
-              <legend className="mb-3 font-bold">1. How often?</legend>
+              <legend className="mb-3 font-medium">1. How often?</legend>
               <div className="grid grid-cols-2 gap-2 sm:max-w-sm">
                 {(['once', 'monthly'] as const).map((f) => (
                   <label
                     key={f}
-                    className="flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-md)] border-2 border-rule px-3 font-bold has-[:checked]:border-ink has-[:checked]:bg-ink has-[:checked]:text-loom has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-indigo"
+                    className="flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-md)] border-2 border-rule px-3 font-medium has-[:checked]:border-ink has-[:checked]:bg-ink has-[:checked]:text-page has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent-dark"
                   >
                     <input type="radio" value={f} className="sr-only" {...register('frequency')} />
                     {f === 'once' ? 'One-time' : 'Monthly'}
@@ -174,12 +178,12 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
             </fieldset>
 
             <fieldset aria-describedby={errors.amount ? 'amount-error' : undefined}>
-              <legend className="mb-3 font-bold">2. How much? (US dollars, demo only)</legend>
+              <legend className="mb-3 font-medium">2. How much? (US dollars, demo only)</legend>
               <div className="grid gap-2 sm:grid-cols-2">
                 {DONATION_PRESETS.map((p) => (
                   <label
                     key={p}
-                    className="flex min-h-20 cursor-pointer flex-col justify-center rounded-[var(--radius-md)] border-2 border-rule p-3 has-[:checked]:border-madder has-[:checked]:bg-madder/5 has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-indigo"
+                    className="flex min-h-20 cursor-pointer flex-col justify-center rounded-[var(--radius-md)] border-2 border-rule p-3 has-[:checked]:border-accent has-[:checked]:bg-accent/5 has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent-dark"
                   >
                     <input
                       type="radio"
@@ -189,29 +193,29 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
                       onChange={() => choosePreset(String(p))}
                       className="sr-only"
                     />
-                    <span className="tabular font-display text-2xl font-bold">{formatMoney(p)}</span>
+                    <span className="tabular font-display text-2xl font-medium">{formatMoney(p)}</span>
                     <span className="text-sm text-ink-soft">{presetMeaning[p]} (illustrative)</span>
                   </label>
                 ))}
-                <label className="flex min-h-14 cursor-pointer items-center gap-3 rounded-[var(--radius-md)] border-2 border-rule p-3 has-[:checked]:border-madder has-[:checked]:bg-madder/5 has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-indigo sm:col-span-2">
+                <label className="flex min-h-14 cursor-pointer items-center gap-3 rounded-[var(--radius-md)] border-2 border-rule p-3 has-[:checked]:border-accent has-[:checked]:bg-accent/5 has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent-dark sm:col-span-2">
                   <input
                     type="radio"
                     name="amount-choice"
                     value="other"
                     checked={choice === 'other'}
                     onChange={() => choosePreset('other')}
-                    className="h-4 w-4 accent-[var(--color-madder)]"
+                    className="h-4 w-4 accent-[var(--color-accent)]"
                   />
-                  <span className="font-bold">Other amount</span>
+                  <span className="font-medium">Other amount</span>
                 </label>
               </div>
               {choice === 'other' && (
                 <div className="mt-3 max-w-xs">
-                  <label htmlFor="custom-amount" className="mb-1.5 block font-bold">
+                  <label htmlFor="custom-amount" className="mb-1.5 block font-medium">
                     Amount in US dollars
                   </label>
                   <div className="relative">
-                    <span aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-bold text-ink-soft">
+                    <span aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-medium text-ink-soft">
                       $
                     </span>
                     <input
@@ -240,10 +244,10 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
             </fieldset>
 
             <div>
-              <label htmlFor="allocation" className="mb-1.5 block font-bold">
+              <label htmlFor="allocation" className="mb-1.5 block font-medium">
                 3. Where should it go?
               </label>
-              <select id="allocation" className={inputClass} aria-invalid={errors.allocation ? true : undefined} {...register('allocation')}>
+              <select id="allocation" className={inputClass} aria-invalid={errors.allocation ? true : undefined} aria-describedby={errors.allocation ? 'allocation-error' : undefined} {...register('allocation')}>
                 {ALLOCATIONS.map((a) => (
                   <option key={a} value={a}>
                     {allocationLabel(a)}
@@ -255,8 +259,8 @@ export function DonateForm({ initialAllocation }: { initialAllocation?: string }
 
             <Honeypot {...register('website')} />
 
-            <div className="rounded-[var(--radius-md)] bg-loom p-4" aria-live="polite">
-              <p className="text-sm font-bold text-ink-soft">Demo summary</p>
+            <div className="rounded-[var(--radius-md)] bg-page p-4" aria-live="polite">
+              <p className="text-sm font-medium text-ink-soft">Demo summary</p>
               <p className="mt-1 text-lg">
                 {validAmount ? <strong className="tabular">{formatMoney(amount)}</strong> : <strong>—</strong>}{' '}
                 {frequency === 'monthly' ? 'every month' : 'once'}, to <strong>{allocationLabel(allocation)}</strong>.

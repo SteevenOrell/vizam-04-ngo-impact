@@ -44,7 +44,7 @@ export function ContactForm() {
   return (
     <form noValidate onSubmit={onSubmit} aria-labelledby="contact-form-title" className="grid gap-6">
       <div>
-        <h2 id="contact-form-title" className="display-md">
+        <h2 id="contact-form-title" className="heading-md">
           Send a message
         </h2>
         <p className="mt-2 text-ink-soft">All fields are required.</p>

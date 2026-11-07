@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Lock, PieChart, RefreshCw } from 'lucide-react';
-import { Container, Eyebrow, IllustrativeNote } from '@/components/ui/primitives';
+import { Container, IllustrativeNote } from '@/components/ui/primitives';
+import { PageHero } from '@/components/sections/PageHero';
 import { DonateForm } from '@/components/forms/DonateForm';
 import { spending } from '@/content/impact';
 import type { SearchParams } from '@/lib/filters';
@@ -21,29 +22,39 @@ export default async function DonatePage({ searchParams }: { searchParams: Promi
 
   return (
     <>
-      <section className="relative overflow-x-clip border-b border-rule">
-        <div aria-hidden="true" className="warp absolute inset-y-0 right-0 w-1/2 text-ink opacity-60" />
-        <Container className="relative py-14 md:py-20">
-          <Eyebrow className="mb-5 text-madder">Donate · demo</Eyebrow>
-          <h1 className="display-lg max-w-4xl">Add your thread.</h1>
-          <p className="mt-6 max-w-2xl text-lg text-ink-soft md:text-xl">
-            Choose an amount, how often and where it goes. <strong className="text-ink">Demo — no money is taken.</strong>{' '}
+      <PageHero
+        eyebrow="Donate · demo"
+        title="Add"
+        titleMuted="your thread."
+        lede={
+          <p>
+            Choose an amount, how often and where it goes. <strong className="font-medium text-ink">Demo — no money is taken.</strong>{' '}
             Weftline Collective is a fictional organization and this page is a design prototype.
           </p>
-        </Container>
-      </section>
+        }
+      />
 
-      <Container className="grid gap-12 py-12 md:py-16 lg:grid-cols-12">
+      <Container className="grid gap-14 pb-24 md:pb-32 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-7">
           <DonateForm initialAllocation={campaign} />
         </div>
-        <aside className="grid content-start gap-8 lg:col-span-5" aria-label="About giving">
-          <div className="relative aspect-[3/2] overflow-hidden rounded-[var(--radius-md)] bg-loom-deep">
-            <Image src="/images/seedling-trays.webp" alt="Several hands potting seedlings into small trays." fill sizes="(min-width: 1024px) 38vw, 100vw" className="object-cover" />
-          </div>
+        <aside className="grid content-start gap-10 lg:col-span-4 lg:col-start-9" aria-label="About giving">
+          <figure>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-band">
+              <Image
+                src="/images/tree-planting.webp"
+                alt="A volunteer and a child plant a young tree together."
+                fill
+                sizes="(min-width: 1024px) 30vw, 100vw"
+                className="object-cover"
+                style={{ objectPosition: '40% 45%' }}
+              />
+            </div>
+            <figcaption className="mt-3 text-sm text-ink-soft">Gifts fund parts, training and paid days of work.</figcaption>
+          </figure>
           <div>
-            <h2 className="flex items-center gap-2 font-display text-2xl font-bold">
-              <PieChart aria-hidden="true" className="h-5 w-5 text-madder" />
+            <h2 className="flex items-center gap-2 font-display text-2xl">
+              <PieChart aria-hidden="true" className="h-5 w-5 text-accent" />
               Where gifts go
             </h2>
             <IllustrativeNote className="mt-3" />
@@ -51,23 +62,23 @@ export default async function DonatePage({ searchParams }: { searchParams: Promi
               {spending.map((s) => (
                 <li key={s.id} className="flex justify-between gap-4 border-b border-rule py-2.5">
                   <span>{s.label}</span>
-                  <strong>{s.percent}%</strong>
+                  <strong className="font-medium">{s.percent}%</strong>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="grid gap-4">
+          <div className="grid gap-4 text-ink-soft">
             <p className="flex items-start gap-3">
-              <Lock aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-indigo" />
+              <Lock aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-accent" />
               <span>
-                <strong>No payment details, ever.</strong> A real version would hand over to a certified payment provider
+                <strong className="font-medium text-ink">No payment details, ever.</strong> A real version would hand over to a certified payment provider
                 (for example Stripe Checkout); this demo never collects card or bank data.
               </span>
             </p>
             <p className="flex items-start gap-3">
-              <RefreshCw aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-indigo" />
+              <RefreshCw aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-accent" />
               <span>
-                <strong>Monthly gifts</strong> would be cancellable at any time from a link in every receipt.
+                <strong className="font-medium text-ink">Monthly gifts</strong> would be cancellable at any time from a link in every receipt.
               </span>
             </p>
           </div>
