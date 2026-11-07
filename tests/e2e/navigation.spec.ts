@@ -17,6 +17,7 @@ test('desktop navigation marks the current page', async ({ page }) => {
   await gotoReady(page, '/impact');
   const nav = page.getByRole('navigation', { name: 'Main' });
   await expect(nav.getByRole('link', { name: 'Impact' })).toHaveAttribute('aria-current', 'page');
+  await nav.getByRole('button', { name: 'What We Do' }).click();
   await nav.getByRole('link', { name: 'Campaigns' }).click();
   await expect(page).toHaveURL(/\/campaigns$/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('asked for by the people who run it');
