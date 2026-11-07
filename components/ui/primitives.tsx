@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { ComponentProps, ReactNode } from 'react';
-import { ArrowRight, Info } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Info } from 'lucide-react';
 import { site } from '@/content/site';
 
 export function Container({ className = '', children, as: Tag = 'div' }: { className?: string; children: ReactNode; as?: 'div' | 'section' | 'header' | 'footer' }) {
@@ -11,13 +11,13 @@ type Variant = 'primary' | 'secondary' | 'ghost' | 'light';
 
 const variants: Record<Variant, string> = {
   primary: 'bg-madder text-white hover:bg-madder-dark',
-  secondary: 'border-2 border-ink text-ink hover:bg-ink hover:text-loom',
+  secondary: 'border border-ink text-ink hover:bg-ink hover:text-white',
   ghost: 'text-ink underline decoration-madder decoration-2 underline-offset-4 hover:decoration-4',
-  light: 'bg-loom text-ink hover:bg-turmeric',
+  light: 'bg-white text-ink hover:bg-turmeric',
 };
 
 const base =
-  'inline-flex min-h-12 items-center justify-center gap-2 rounded-[var(--radius-md)] px-5 py-3 font-bold leading-tight transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60';
+  'inline-flex min-h-12 items-center justify-center gap-2 rounded-[var(--radius-md)] px-6 py-3 font-medium leading-tight transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60';
 
 export function ButtonLink({
   href,
@@ -39,12 +39,13 @@ export function Button({ variant = 'primary', className = '', ...rest }: Compone
   return <button className={`${base} ${variants[variant]} ${className}`} {...rest} />;
 }
 
-type Tone = 'madder' | 'ink' | 'moss' | 'indigo' | 'turmeric' | 'outline';
+type Tone = 'madder' | 'ink' | 'moss' | 'indigo' | 'turmeric' | 'outline' | 'grey';
 const tones: Record<Tone, string> = {
   madder: 'bg-madder text-white',
   ink: 'bg-ink text-loom',
   moss: 'bg-moss text-white',
   indigo: 'bg-indigo text-white',
+  grey: 'bg-white text-ink-soft ring-1 ring-rule',
   turmeric: 'bg-turmeric text-ink',
   outline: 'border border-current',
 };
@@ -58,18 +59,20 @@ export function Tag({ tone = 'outline', children, className = '' }: { tone?: Ton
   );
 }
 
-export function Eyebrow({ children, className = '' }: { children: ReactNode; className?: string }) {
+/** Small label with a brown square bullet (bullet lightens on dark sections). */
+export function Eyebrow({ children, className = '', as: Tag = 'p' }: { children: ReactNode; className?: string; as?: 'p' | 'h2' }) {
   return (
-    <p className={`eyebrow flex items-center gap-3 ${className}`}>
-      <span aria-hidden="true" className="inline-block h-0.5 w-8 bg-current opacity-70" />
+    <Tag className={`eyebrow flex items-center gap-3 ${className}`}>
+      <span aria-hidden="true" className="inline-block h-2 w-2 shrink-0 bg-madder [.on-dark_&]:bg-turmeric" />
       {children}
-    </p>
+    </Tag>
   );
 }
 
 export function SectionHeading({
   eyebrow,
   title,
+  titleMuted,
   lede,
   id,
   className = '',
@@ -77,6 +80,8 @@ export function SectionHeading({
 }: {
   eyebrow?: string;
   title: ReactNode;
+  /** Second, grey tone of a two-tone title. */
+  titleMuted?: ReactNode;
   lede?: ReactNode;
   id?: string;
   className?: string;
@@ -84,9 +89,15 @@ export function SectionHeading({
 }) {
   return (
     <div className={`max-w-3xl ${className}`}>
-      {eyebrow && <Eyebrow className="mb-4 text-madder">{eyebrow}</Eyebrow>}
+      {eyebrow && <Eyebrow className="mb-5">{eyebrow}</Eyebrow>}
       <H id={id} className="display-md">
         {title}
+        {titleMuted && (
+          <>
+            {' '}
+            <span className="title-muted">{titleMuted}</span>
+          </>
+        )}
       </H>
       {lede && <p className="mt-5 text-lg text-ink-soft">{lede}</p>}
     </div>
@@ -96,7 +107,7 @@ export function SectionHeading({
 /** The required honesty label for every impact figure. */
 export function IllustrativeNote({ className = '', dark = false }: { className?: string; dark?: boolean }) {
   return (
-    <p className={`inline-flex items-start gap-2 text-sm font-bold ${dark ? 'text-turmeric' : 'text-madder'} ${className}`}>
+    <p className={`inline-flex items-start gap-2 text-sm font-medium ${dark ? 'text-turmeric' : 'text-madder'} ${className}`}>
       <Info aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" />
       <span>{site.illustrativeNotice}</span>
     </p>
@@ -119,5 +130,23 @@ export function WovenProgress({ percent, label, dark = false }: { percent: numbe
         <div className="woven-fill h-full rounded-[2px] transition-[width] duration-700" style={{ width: `${p}%` }} />
       </div>
     </div>
+  );
+}
+
+/** Text link followed by a square brown arrow chip (the site's signature call to action). */
+export function ArrowLink({
+  href,
+  children,
+  className = '',
+  onDark = false,
+  ...rest
+}: ComponentProps<typeof Link> & { onDark?: boolean }) {
+  return (
+    <Link href={href} className={`arrow-link group inline-flex items-center gap-4 font-medium ${onDark ? 'text-white' : 'text-ink'} ${className}`} {...rest}>
+      <span className="underline decoration-transparent decoration-1 underline-offset-4 transition-colors group-hover:decoration-current">{children}</span>
+      <span aria-hidden="true" className="arrow-chip">
+        <ArrowUpRight className="h-5 w-5" />
+      </span>
+    </Link>
   );
 }

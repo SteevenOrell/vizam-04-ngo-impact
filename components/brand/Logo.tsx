@@ -12,7 +12,7 @@ export function LogoMark({ className, title }: Props) {
       <path
         d="M3 24c4 0 5-8 7-8s3 8 10 8 8-8 10-8 3 8 7 8"
         fill="none"
-        stroke="var(--color-madder)"
+        stroke="var(--weft, var(--color-madder))"
         strokeWidth="3.5"
         strokeLinecap="round"
       />
@@ -24,9 +24,9 @@ export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className ?? ''}`}>
       <LogoMark className="h-8 w-8 shrink-0" />
-      <span className="font-display text-[1.3rem] font-bold leading-none tracking-tight">
+      <span className="font-display text-[1.35rem] font-medium leading-none tracking-tight">
         Weftline<span className="sr-only"> Collective</span>
-        <span aria-hidden="true" className="ml-1 hidden font-semibold opacity-70 sm:inline">
+        <span aria-hidden="true" className="ml-1 hidden font-normal opacity-80 sm:inline">
           Collective
         </span>
       </span>

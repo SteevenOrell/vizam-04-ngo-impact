@@ -20,17 +20,16 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-x-clip border-b border-rule">
-      <div aria-hidden="true" className="warp absolute inset-y-0 right-0 w-1/2 text-ink opacity-60" />
       <div className="relative mx-auto grid w-full max-w-[1240px] gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-12 lg:gap-12 lg:px-10">
         <div className={image ? 'lg:col-span-7' : 'lg:col-span-10'}>
-          <Eyebrow className="mb-5 text-madder">{eyebrow}</Eyebrow>
+          <Eyebrow className="mb-5">{eyebrow}</Eyebrow>
           <h1 className="display-lg">{title}</h1>
           <div className="mt-6 max-w-2xl text-lg text-ink-soft md:text-xl">{lede}</div>
           {children && <div className="mt-8">{children}</div>}
         </div>
         {image && (
           <div className="relative lg:col-span-5">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-md)] bg-loom-deep lg:aspect-[4/5]">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-loom-deep lg:aspect-[4/5]">
               <Image
                 src={image.src}
                 alt={image.alt}

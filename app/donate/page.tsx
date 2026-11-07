@@ -22,7 +22,6 @@ export default async function DonatePage({ searchParams }: { searchParams: Promi
   return (
     <>
       <section className="relative overflow-x-clip border-b border-rule">
-        <div aria-hidden="true" className="warp absolute inset-y-0 right-0 w-1/2 text-ink opacity-60" />
         <Container className="relative py-14 md:py-20">
           <Eyebrow className="mb-5 text-madder">Donate · demo</Eyebrow>
           <h1 className="display-lg max-w-4xl">Add your thread.</h1>

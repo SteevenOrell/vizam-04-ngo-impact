@@ -23,7 +23,6 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
   return (
     <>
       <section className="relative border-b border-rule">
-        <div aria-hidden="true" className="warp absolute inset-y-0 right-0 w-1/2 text-ink opacity-60" />
         <Container className="relative py-14 md:py-20">
           <Eyebrow className="mb-5 text-madder">News & events</Eyebrow>
           <h1 className="display-lg max-w-4xl">Notes from the loom.</h1>

@@ -7,13 +7,13 @@ import { regionLabels, statusLabels, themeLabels } from '@/content/site';
 import { formatMoney } from '@/lib/format';
 import { Tag, WovenProgress } from '@/components/ui/primitives';
 
-const statusTone = { active: 'moss', upcoming: 'indigo', completed: 'ink' } as const;
+const statusTone = { active: 'madder', upcoming: 'ink', completed: 'grey' } as const;
 
 export function CampaignCard({ campaign, headingLevel = 'h3' }: { campaign: Campaign; headingLevel?: 'h2' | 'h3' }) {
   const H = headingLevel;
   const pct = fundedPercent(campaign);
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-md)] border border-rule bg-white transition-shadow duration-300 focus-within:shadow-[0_0_0_3px_var(--color-indigo)] hover:shadow-[0_18px_40px_-24px_rgb(22_25_58/0.45)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-rule bg-white transition-shadow duration-300 focus-within:shadow-[0_0_0_3px_var(--color-madder-dark)] hover:shadow-[0_18px_40px_-24px_rgb(20_18_15/0.4)]">
       <div className="relative aspect-[3/2] overflow-hidden bg-loom-deep">
         <Image
           src={campaign.image.src}
